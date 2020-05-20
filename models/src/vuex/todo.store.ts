@@ -31,8 +31,6 @@ const actions = {
     { commit }: ActionContext<TodoState, RootState>,
     payload: { todo: Todo }
   ) {
-    console.log("payload", payload);
-
     const addedTodo = await addTodo(payload.todo);
     commit("addTodos", [addedTodo]);
   },
@@ -47,8 +45,6 @@ const actions = {
     commit("updateTodo", { _id: _id, todo: { ...existingTodo, ...todo } });
     try {
       const updatedTodo = await updateTodo(_id, todo);
-      console.log("returneddd", updatedTodo, _id, todo);
-
       commit("updateTodo", { _id: _id, todo: updatedTodo });
     } catch (err) {
       commit("updateTodo", { _id: _id, todo: existingTodo });

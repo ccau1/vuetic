@@ -16,15 +16,17 @@ const getters = {
 const actions = {
   async setLocale(
     { commit }: ActionContext<LocaleState, RootState>,
-    payload: { locale: string }
+    locale: string
   ) {
-    commit("setLocale", payload);
+    commit("setLocale", locale);
   }
 };
 
 const mutations = {
-  setLocale: (state: LocaleState, payload: { locale: string }) =>
-    (state.currentLocale = payload.locale)
+  setLocale(state: LocaleState, locale: string) {
+    state.currentLocale = locale;
+    return state;
+  }
 };
 
 export default {

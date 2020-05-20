@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
   msg: {
-    emptyList: "空清單"
+    emptyList: "空清单"
   },
   err: {}
 };

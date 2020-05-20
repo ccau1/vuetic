@@ -18,8 +18,8 @@
 -- [ ] create example using theme object in Button
 -- [ ] update all components to use theme
 - locale (https://kazupon.github.io/vue-i18n/installation.html#compatibility-note)
--- [ ] add basic storage of locale files and selected locale
--- [ ] add LocaleSwitcher container
+-- [x] add basic vuex storage of current locale
+-- [x] add LocaleSwitcher container
 -- [ ] ensure locale switch will update locales from api calls as well
 - layout
 -- [ ] allow define layout for each route

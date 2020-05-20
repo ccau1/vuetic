@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/camelcase */
 export default {
-  msg_empty_list: "Empty List"
+  msg: {
+    emptyList: "Empty List"
+  },
+  err: {}
 };

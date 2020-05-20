@@ -5,7 +5,7 @@ import messages from ".";
 Vue.use(VueI18n);
 
 export const i18n = new VueI18n({
-  locale: "en", // set locale
-  fallbackLocale: process.env.LOCALE_FALLBACK || "en",
+  locale: process.env.VUE_APP_LOCALE || "en", // set locale
+  fallbackLocale: process.env.VUE_APP_LOCALE_FALLBACK || "en",
   messages // set locale messages
 });

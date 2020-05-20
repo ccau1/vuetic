@@ -13,7 +13,7 @@
       />
     </div>
     <div v-if="todos.length === 0" class="empty-todo-list">
-      {{ $t("msg_empty_list") }}
+      {{ $t("msg.emptyList") }}
     </div>
   </div>
 </template>
