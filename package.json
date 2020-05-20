@@ -1,0 +1,19 @@
+{
+  "name": "vuetic",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/ccau1/vuetic.git",
+  "author": "Calvin Au <calvinau@httpeace.com>",
+  "license": "MIT",
+  "scripts": {
+    "i": "yarn i:components && yarn i:models && yarn i:server && yarn i:web",
+    "i:components": "cd components && yarn i",
+    "i:models": "cd models && yarn i",
+    "i:server": "cd _server && yarn i",
+    "i:web": "cd web && yarn i",
+    "start": "(yarn start:server) & (yarn start:web) & (yarn start:desktop)",
+    "start:server": "cd _server && yarn start",
+    "start:web": "cd web && yarn serve",
+    "start:desktop": "cd desktop && yarn electron:serve"
+  }
+}
