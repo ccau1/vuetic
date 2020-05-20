@@ -46,9 +46,11 @@ export default {
     _addTodo() {
       this.errors = this.validate();
       if (Object.keys(this.errors).length) return;
-      this.addTodo({todo: {
-        text: this.text
-      }});
+      this.addTodo({
+        todo: {
+          text: this.text
+        }
+      });
       this.text = "";
     }
   },

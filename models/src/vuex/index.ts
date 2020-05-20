@@ -13,3 +13,5 @@ requireModule.keys().forEach((fileName: string) => {
 });
 
 export default modules;
+
+export type RootState = {};

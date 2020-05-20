@@ -9,8 +9,8 @@
 
 <script>
 // @ is an alias to /src
-import TodoForm from "@/modules/Todo/containers/TodoForm";
-import TodoList from "@/modules/Todo/containers/TodoList";
+import TodoForm from "@/containers/Todo/TodoForm";
+import TodoList from "@/containers/Todo/TodoList";
 
 export default {
   name: "Todos",

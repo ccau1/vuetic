@@ -6,17 +6,19 @@
         <router-link to="/about">About</router-link> |
         <router-link to="/todos">Todos</router-link>
       </div>
+      <LocaleSwitcher />
       <router-view />
     </div>
   </ThemeProvider>
 </template>
 
 <script>
-import ThemeProvider from './ThemeProvider.vue';
+import ThemeProvider from "./ThemeProvider.vue";
+import LocaleSwitcher from "../containers/Locale/LocaleSwitcher.vue";
 
 export default {
-  components: {ThemeProvider}
-}
+  components: { ThemeProvider, LocaleSwitcher }
+};
 </script>
 
 <style lang="scss">

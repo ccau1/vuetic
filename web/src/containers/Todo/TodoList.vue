@@ -3,19 +3,24 @@
     <div class="list-item" v-for="item in todos" :key="item._id">
       <TodoListItem
         :item="item"
-        @click="updateTodo({_id: item._id, todo: {isCompleted: !item.isCompleted}})"
-        @deleteItem="deleteTodo({_id: item._id})"
+        @click="
+          updateTodo({
+            _id: item._id,
+            todo: { isCompleted: !item.isCompleted }
+          })
+        "
+        @deleteItem="deleteTodo({ _id: item._id })"
       />
     </div>
     <div v-if="todos.length === 0" class="empty-todo-list">
-      Empty todo list
+      {{ $t("msg_empty_list") }}
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import TodoListItem from "../components/TodoListItem";
+import TodoListItem from "../../components/Todo/TodoListItem";
 
 export default {
   name: "TodoList",
