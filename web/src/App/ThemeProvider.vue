@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import ThemeProvider from '../../../components/web/ThemeProvider.vue';
+import ThemeProvider from "../../../components/web/ThemeProvider.vue";
 
 export default {
-  components: {ThemeProvider},
+  components: { ThemeProvider },
   data() {
     return {
       theme: {
@@ -27,14 +27,10 @@ export default {
         },
         dimensions: {
           scale: 1.5,
-          screen_horizontal_padding: "$scale * 20"
+          screenHorizontalPadding: "$scale * 20"
         }
       }
     };
   }
-}
+};
 </script>
-
-<style>
-
-</style>

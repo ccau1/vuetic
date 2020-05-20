@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div
       class="list-item"
       :class="{ selected: currentLocale() === locale }"
@@ -33,12 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+}
 .list-item {
-  padding: 10px 0;
+  padding: 10px 10px;
   cursor: pointer;
 
   &.selected {
-    background-color: blue;
+    background-color: #eee;
   }
 }
 </style>

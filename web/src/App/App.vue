@@ -1,23 +1,26 @@
 <template>
   <ThemeProvider>
-    <div id="app">
-      <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/todos">Todos</router-link>
+    <LocaleProvider>
+      <div id="app">
+        <div id="nav">
+          <router-link to="/">Home</router-link> |
+          <router-link to="/about">About</router-link> |
+          <router-link to="/todos">Todos</router-link>
+        </div>
+        <LocaleSwitcher />
+        <router-view />
       </div>
-      <LocaleSwitcher />
-      <router-view />
-    </div>
+    </LocaleProvider>
   </ThemeProvider>
 </template>
 
 <script>
 import ThemeProvider from "./ThemeProvider.vue";
+import LocaleProvider from "./LocaleProvider.vue";
 import LocaleSwitcher from "../containers/Locale/LocaleSwitcher.vue";
 
 export default {
-  components: { ThemeProvider, LocaleSwitcher }
+  components: { ThemeProvider, LocaleProvider, LocaleSwitcher }
 };
 </script>
 
