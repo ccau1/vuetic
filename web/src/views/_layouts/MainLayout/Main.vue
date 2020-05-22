@@ -1,5 +1,5 @@
 <template>
-  <main class="container" :style="style">
+  <main :style="style">
     <slot />
   </main>
 </template>
@@ -10,12 +10,15 @@ export default {
   computed: {
     style() {
       const containerStyle = {};
-      containerStyle.width = this.theme.dimensions.contentMaxWidth
+      containerStyle.width = this.theme?.dimensions?.contentMaxWidth
         ? this.theme.dimensions.contentMaxWidth + "px"
         : "auto";
 
       containerStyle.paddingRight = containerStyle.paddingLeft =
-        this.theme.dimensions.contentHorizontalPadding + "px";
+        (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px";
+      containerStyle.paddingTop = containerStyle.paddingBottom =
+        (this.theme?.dimensions?.contentVerticalPadding || 0) + "px";
+
       containerStyle.backgroundColor =
         this.theme?.colors?.backgroundContent || "#fff";
       containerStyle.color = this.theme?.colors?.text?.bgContent || "#000";
@@ -27,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+main {
   flex: 1;
   margin: 0 auto;
   overflow-y: auto;

@@ -2,24 +2,24 @@ import { Theme } from "@components/web";
 
 export default {
   colors: {
-    primary: "#197278",
-    secondary: "#c44536",
+    primary: "#ff6700",
+    secondary: "#004e98",
     info: "#03A9F4",
     danger: "#F44336",
     warning: "#FFC107",
     success: "#4CAF50",
-    background: "#edddd4",
-    backgroundContent: "#edddd4",
+    background: "#ebebeb",
+    backgroundContent: "#ebebeb",
     backgroundSection: "#fff",
     text: {
       bgLight: "#000",
       bgDark: "#fff",
       bgContent: "@bgLight",
+      bgInfo: "@bgLight",
+      bgWarning: "@bgLight",
       bgPrimary: "$$colors.text.bgDark",
       bgSecondary: "@bgDark",
-      bgInfo: "@bgLight",
       bgDanger: "@bgDark",
-      bgWarning: "@bgLight",
       bgSuccess: "@bgDark"
     },
     test: {

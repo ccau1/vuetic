@@ -60,7 +60,7 @@ export default {
       return (
         this.rounded ||
         (this.rounded === null &&
-          this.theme.components.textInput.defaultRounded)
+          this.theme?.components?.textInput?.defaultRounded)
       );
     }
   },

@@ -10,7 +10,7 @@ export default {
   computed: {
     style() {
       const style = {};
-      style.backgroundColor = this.theme.colors.background;
+      style.backgroundColor = this.theme?.colors?.background;
       return style;
     }
   }

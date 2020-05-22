@@ -37,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
-  border: 1px solid #eee;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   text-align: left;
   margin-bottom: -1px;
@@ -47,6 +47,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
 
   &.completed {
     text-decoration: line-through;
@@ -63,7 +64,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.6);
   }
 }

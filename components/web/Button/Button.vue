@@ -19,7 +19,7 @@ export default {
     click: Function,
     status: {
       default: "secondary",
-      validate: (val) =>
+      validate: val =>
         [
           "primary",
           "secondary",
@@ -45,7 +45,8 @@ export default {
 
       if (
         this.rounded ||
-        (this.rounded === null && this.theme.components.button.defaultRounded)
+        (this.rounded === null &&
+          this.theme?.components?.button?.defaultRounded)
       ) {
         style.borderRadius = "8px";
       }

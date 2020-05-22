@@ -34,12 +34,16 @@ export default {
   inject: ["theme"],
   data() {
     const headerStyle = {
-      backgroundColor: this.theme.colors.primary,
-      color: this.theme.colors.text.bgPrimary
+      backgroundColor: this.theme?.colors?.primary || "#fea",
+      color: this.theme?.colors?.text?.bgPrimary || "#000",
+      paddingLeft:
+        (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px",
+      paddingRight:
+        (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px"
     };
 
     const headerInnerStyle = {};
-    if (this.theme.dimensions.contentMaxWidth) {
+    if (this.theme?.dimensions?.contentMaxWidth) {
       headerInnerStyle.maxWidth = this.theme.dimensions.contentMaxWidth + "px";
     }
 
@@ -50,8 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #fea;
-  padding: 10px 10px;
+  padding: 10px 0px;
 
   & > .header-inner {
     display: flex;
