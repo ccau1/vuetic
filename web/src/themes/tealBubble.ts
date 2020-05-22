@@ -31,7 +31,7 @@ export default {
   dimensions: {
     scale: 1.5,
     contentMaxWidth: "$scale * 700",
-    contentHorizontalPadding: 0,
+    contentHorizontalPadding: "$scale * 5",
     contentVerticalPadding: "$scale * 30"
   },
   components: {
