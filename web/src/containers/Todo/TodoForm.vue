@@ -13,7 +13,7 @@
       @blur="onInputBlur"
     />
     <Spacer width="5px" />
-    <Button @click="e => _addTodo(e)" status="warning">Add Todo</Button>
+    <Button @click="e => _addTodo(e)">Add Todo</Button>
   </div>
 </template>
 

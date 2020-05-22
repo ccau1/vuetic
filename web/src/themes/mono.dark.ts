@@ -2,23 +2,25 @@ import { Theme } from "@components/web";
 
 export default {
   colors: {
-    primary: "#3e9",
-    secondary: "#c44536",
+    primary: "#e63946",
+    secondary: "#457b9d",
     info: "#03A9F4",
     danger: "#F44336",
     warning: "#FFC107",
     success: "#4CAF50",
-    background: "#283d3b",
-    backgroundSection: "#141e1d",
+    background: "#1d3557",
+    backgroundContent: "#1d3557",
+    backgroundSection: "#fff",
     text: {
       bgLight: "#000",
       bgDark: "#fff",
+      bgContent: "@bgDark",
       bgPrimary: "$$colors.text.bgDark",
       bgSecondary: "@bgDark",
-      bgInfo: "@bgLight",
-      bgDanger: "@bgDark",
-      bgWarning: "@bgLight",
-      bgSuccess: "@bgDark"
+      bgInfo: "@bgDark",
+      bgDanger: "@bgLight",
+      bgWarning: "@bgDark",
+      bgSuccess: "@bgLight"
     },
     test: {
       zero: "$test.one",
@@ -29,7 +31,7 @@ export default {
   dimensions: {
     scale: 1.5,
     contentMaxWidth: "$scale * 700",
-    screenHorizontalPadding: "$scale * 20"
+    contentHorizontalPadding: 0
   },
   components: {
     typography: {
@@ -40,6 +42,12 @@ export default {
         danger: "$$colors.danger",
         warning: "$$colors.warning"
       }
+    },
+    button: {
+      defaultRounded: true
+    },
+    textInput: {
+      defaultRounded: true
     }
   }
 } as Theme;

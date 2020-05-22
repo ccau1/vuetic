@@ -4,7 +4,7 @@
     :class="{
       horizontal,
       full: this.full !== undefined,
-      rounded: this.rounded !== undefined,
+      rounded: this.isRounded,
       'label-floated': isFloated
     }"
     v-click-outside="onBlur"
@@ -29,28 +29,39 @@ import ClickOutside from "vue-click-outside";
 import ErrorMessage from "../ErrorMessage";
 export default {
   name: "TextInput",
-  props: [
-    "label",
-    "placeholder",
-    "value",
-    "float",
-    "full",
-    "rounded",
-    "error",
-    "horizontal",
-    "enter",
-    "blur",
-    "focus"
-  ],
+  props: {
+    label: String,
+    placeholder: String,
+    value: String,
+    float: Boolean,
+    full: Boolean,
+    rounded: {
+      default: null,
+      type: Boolean
+    },
+    error: String,
+    horizontal: Boolean,
+    enter: Function,
+    blur: Function,
+    focus: Function
+  },
+  inject: ["theme"],
   directives: { ClickOutside },
   components: {
     ErrorMessage
   },
   computed: {
     // handles placeholder text
-    _placeholder: function() {
+    _placeholder() {
       // if label exists and float, do not show placeholder
       return this.label && this.float !== undefined ? "" : this.placeholder;
+    },
+    isRounded() {
+      return (
+        this.rounded ||
+        (this.rounded === null &&
+          this.theme.components.textInput.defaultRounded)
+      );
     }
   },
   data: function() {
@@ -83,7 +94,6 @@ export default {
 div.container {
   padding: 30px 0;
   position: relative;
-  background-color: #fff;
 }
 
 div.input-error-container {
@@ -99,10 +109,12 @@ label {
   position: absolute;
   top: 40px;
   left: 10px;
-  padding: 2px 5px;
+  padding: 2px 10px;
   z-index: 1;
   opacity: 0.4;
   user-select: none;
+  background-color: transparent;
+  color: #000;
 
   transition: all 300ms;
 
@@ -110,10 +122,11 @@ label {
   }
 }
 .label-floated label {
-  top: 18px;
+  top: 17px;
   transform: scale(0.8) translateX(-4%);
-  background-color: #fff;
   opacity: 1;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
 }
 
 input {
@@ -122,6 +135,7 @@ input {
   border: 1px solid #eee;
   padding: 10px 10px;
   outline: none;
+  background-color: rgba(255, 255, 255, 1);
 }
 .rounded input {
   border-radius: 8px;

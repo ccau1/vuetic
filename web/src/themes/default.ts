@@ -31,7 +31,7 @@ export default {
   dimensions: {
     scale: 1.5,
     contentMaxWidth: "$scale * 700",
-    screenHorizontalPadding: "$scale * 20"
+    contentHorizontalPadding: 0
   },
   components: {
     typography: {
@@ -42,6 +42,12 @@ export default {
         danger: "$$colors.danger",
         warning: "$$colors.warning"
       }
+    },
+    button: {
+      defaultRounded: true
+    },
+    textInput: {
+      defaultRounded: true
     }
   }
 } as Theme;

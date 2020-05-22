@@ -1,7 +1,7 @@
-import axios from 'axios';
+import { Api, ApiConfig } from "../lib/Api";
 
-const instance = axios.create({
+const config: ApiConfig = {
   baseURL: "http://localhost:3000/"
-});
+};
 
-export default instance;
+export default new Api(config);

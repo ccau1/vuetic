@@ -7,12 +7,14 @@ export default {
   props: ["theme"],
   data() {
     return {
-      themer: this.buildParam(this.theme)
+      themer: this.buildParam(this.theme),
+      renderComponent: true
     };
   },
   watch: {
     theme(newTheme) {
       this.themer = this.buildParam(newTheme);
+      this.forceRerender();
     }
   },
   provide() {
@@ -24,6 +26,15 @@ export default {
     };
   },
   methods: {
+    forceRerender() {
+      // Remove my-component from the DOM
+      this.renderComponent = false;
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.renderComponent = true;
+      });
+    },
     buildParam(theme) {
       // define how many times the buildParam will retry for pending/dependent paths
       const RETRIES = 5;
@@ -42,7 +53,7 @@ export default {
     }
   },
   render() {
-    return this.$slots.default;
+    return this.renderComponent ? this.$slots.default : null;
   }
 };
 </script>

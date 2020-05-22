@@ -1,6 +1,8 @@
 <template>
   <footer :style="footerStyle">
-    <div class="container-inner" :style="containerInnerStyle">abc</div>
+    <div class="container-inner" :style="containerInnerStyle">
+      © 2020 Abc, Inc.
+    </div>
   </footer>
 </template>
 
@@ -9,7 +11,8 @@ export default {
   inject: ["theme"],
   data() {
     const footerStyle = {
-      backgroundColor: this.theme.colors.primary
+      backgroundColor: this.theme.colors.primary,
+      color: this.theme.colors.text.bgPrimary
     };
 
     const containerInnerStyle = {};

@@ -12,7 +12,7 @@
         @deleteItem="deleteTodo({ _id: item._id })"
       />
     </div>
-    <div v-if="todos.length === 0" class="empty-todo-list">
+    <div v-if="!todos || todos.length === 0" class="empty-todo-list">
       {{ $t("msg.emptyList") }}
     </div>
   </div>

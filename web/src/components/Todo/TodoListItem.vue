@@ -44,9 +44,18 @@ export default {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   &.completed {
     text-decoration: line-through;
   }
+  & > .text {
+    flex: 1;
+    margin-left: 5px;
+  }
+
   &:active::after {
     content: "";
     position: absolute;
@@ -59,9 +68,9 @@ export default {
   }
 }
 .deleteBtn {
-  position: absolute;
-  top: 0;
-  right: -40px;
+  // position: absolute;
+  // top: 0;
+  // right: -40px;
   padding: 12px;
   z-index: 1;
 }
