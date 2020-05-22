@@ -1,5 +1,8 @@
 import { create, ApisauceInstance } from "apisauce";
 import TokenManager from "./TokenManager";
+import ApiInterceptor, {
+  ApiInterceptorFactory
+} from "./ApiInterceptors/ApiInterceptors";
 
 export interface ApiConfig {
   baseURL: string;
@@ -7,6 +10,8 @@ export interface ApiConfig {
     enable?: boolean;
     url?: string;
   };
+  debug?: boolean;
+  interceptors?: ApiInterceptorFactory[];
 }
 
 interface ApiSauce {
@@ -52,11 +57,12 @@ export class Api implements ApiSauce {
   }
 
   protected _getDefaultConfig() {
-    return {};
+    return {
+      interceptors: []
+    };
   }
 
   protected _initApi(): Api {
-    const that = this;
     const config = this.getConfig();
     this.api = create(config);
     for (const name in this.api) {
@@ -74,7 +80,24 @@ export class Api implements ApiSauce {
       }
     }
 
-    console.log("inited", this);
+    const axiosInterceptors = this.api.axiosInstance.interceptors;
+
+    config.interceptors?.map((Interceptor: ApiInterceptorFactory) => {
+      const interceptor: ApiInterceptor = new Interceptor();
+      if (!config.debug && interceptor.debugOnly) return;
+      if (interceptor.request) {
+        axiosInterceptors.request.use(
+          interceptor.request,
+          interceptor.whenError
+        );
+      }
+      if (interceptor.response) {
+        axiosInterceptors.response.use(
+          interceptor.response,
+          interceptor.whenError
+        );
+      }
+    });
 
     return this;
   }
