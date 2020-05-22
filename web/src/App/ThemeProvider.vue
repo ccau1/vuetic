@@ -5,32 +5,21 @@
 </template>
 
 <script>
-import ThemeProvider from "../../../components/web/ThemeProvider.vue";
+import ThemeProvider from "@components/web/ThemeProvider.vue";
+import themes from "@/themes";
+import { mapGetters } from "vuex";
 
 export default {
   components: { ThemeProvider },
-  data() {
-    return {
-      theme: {
-        colors: {
-          primary: "#2196F3",
-          secondary: "#E91E63",
-          info: "#03A9F4",
-          danger: "#F44336",
-          warning: "#FFC107",
-          success: "#4CAF50",
-          test: {
-            zero: "$test.one",
-            one: "$primary",
-            two: "$test.one"
-          }
-        },
-        dimensions: {
-          scale: 1.5,
-          screenHorizontalPadding: "$scale * 20"
-        }
-      }
-    };
+  computed: {
+    ...mapGetters(["currentTheme", "isThemeDark"]),
+    theme() {
+      const { isThemeDark, currentTheme } = this;
+      const theme = isThemeDark
+        ? themes[`${currentTheme}.dark`] || themes[currentTheme]
+        : themes[currentTheme];
+      return theme;
+    }
   }
 };
 </script>

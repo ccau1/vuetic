@@ -3,7 +3,7 @@ import App from "./App";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import components from "../../components/web/_global";
+import components from "@components/web/_global";
 import { i18n } from "./locales/i18n";
 
 Vue.config.productionTip = false;

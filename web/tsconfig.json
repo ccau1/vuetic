@@ -14,8 +14,7 @@
     "baseUrl": ".",
     "types": ["webpack-env", "mocha", "chai"],
     "paths": {
-      "@/*": ["src/*"],
-      "components/*": ["../components/*"]
+      "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

@@ -2,14 +2,12 @@
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      ...mapGetters(["currentLocale"])
-    };
+  computed: {
+    ...mapGetters(["currentLocale"])
   },
   mounted() {
     // ensure i18n syncs with vuex
-    this.$i18n.locale = this.currentLocale();
+    this.$i18n.locale = this.currentLocale;
   },
   render() {
     return this.$slots.default;

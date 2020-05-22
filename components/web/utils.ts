@@ -1,50 +1,82 @@
-export const COMPUTE_REGEX = /\$([\w_\d\.]+)/;
+export const COMPUTE_REGEX = /(\$|\$\$|@)([\w_\d\.]+)/;
 
-type Parameters = {[key: string]: string | Parameters};
+type Parameters = { [key: string]: string | Parameters };
 // type ParameterArrayItem = {key: string, field: string};
 
-
-export const buildParam = (parameters: Parameters, _subPath?: string, retries = 5): {value: string | Parameters, pendingPaths: string[]} => {
+export const buildParam = (
+  parameters: Parameters,
+  _subPath?: string,
+  retries = 5
+): { value: string | Parameters; pendingPaths: string[] } => {
   // instantiate return values
   let pendingPaths: string[] = [];
   let value: Parameters | string = {};
   // if no parameters present
   if (!parameters) {
     // just return default structure
-    return {pendingPaths, value};
+    return { pendingPaths, value };
   }
   // get subpath in parameters
   const subPathParameters = subPath(parameters, _subPath);
-  
+
   // if sub path param is a string
-  if (typeof subPathParameters === 'string') {
+  if (typeof subPathParameters === "string") {
     // handle its value, replacing any handlebar fields
     // with actual fields
-    value = subPathParameters.replace(new RegExp(COMPUTE_REGEX, 'g'), (full: string, m1: string) => {
-      // get the value of the path
-      const item = subPath(parameters, m1);
-      
-      // if the value is a string
-      if (typeof item === 'string') {
-        // test if value has handlebars
-        if (COMPUTE_REGEX.test(item)) {
-          // if it does have handlebars,
-          // add pending count so we can track total pending
-          // count
-          pendingPaths.push(_subPath || '');
+    value = subPathParameters.replace(
+      new RegExp(COMPUTE_REGEX, "g"),
+      (full: string, scope: string, matchedPath: string) => {
+        let scopedParameters = parameters;
+        switch (scope) {
+          case "$":
+            scopedParameters = subPath(
+              parameters,
+              _subPath?.split(".").shift()
+            ) as Parameters;
+            break;
+          case "$$":
+            scopedParameters = parameters;
+            break;
+          case "@":
+            scopedParameters = subPath(
+              parameters,
+              _subPath
+                ?.split(".")
+                .slice(0, -1)
+                .join(".")
+            ) as Parameters;
+            break;
         }
-        // return item for now so we can flatten the pointer levels
-        return item;
-      } else if (typeof item === 'number') {
-        return item; 
-      } else if (typeof item === 'object') {
-        // item is object? just return object string for now
-        return '[object object]';
-      } else {
-        // neither object nor string, throw error
-        throw new Error(`invalid handlebar path: ${m1} in ${_subPath}`);
+        // get the value of the path
+        const item = subPath(scopedParameters, matchedPath);
+
+        // if the value is a string
+        if (typeof item === "string") {
+          // test if value has handlebars
+          if (COMPUTE_REGEX.test(item)) {
+            // if it does have handlebars,
+            // add pending count so we can track total pending
+            // count
+            pendingPaths.push(_subPath || "");
+            // return original string for now
+            return `${scope}${matchedPath}`;
+          } else {
+            // dependent var resolved, return that var
+            return item;
+          }
+        } else if (typeof item === "number") {
+          return item;
+        } else if (typeof item === "object") {
+          // item is object? just return object string for now
+          return "[object object]";
+        } else {
+          // neither object nor string, throw error
+          throw new Error(
+            `invalid handlebar path: ${matchedPath} in ${_subPath}`
+          );
+        }
       }
-    });
+    );
     // if it can eval, eval field
     try {
       value = eval(value as string);
@@ -66,7 +98,7 @@ export const buildParam = (parameters: Parameters, _subPath?: string, retries = 
       thisPath.push(p);
 
       // call buildParam since it handles both object and string
-      const result = buildParam(parameters, thisPath.join('.'), 0);
+      const result = buildParam(parameters, thisPath.join("."), 0);
       // append any pending
       pendingPaths = pendingPaths.concat(result.pendingPaths);
       // set new value to param (also references parameters)
@@ -80,37 +112,43 @@ export const buildParam = (parameters: Parameters, _subPath?: string, retries = 
   // or pendingPaths empty
   for (let r = 0; r < retries && pendingPaths.length !== 0; r++) {
     // go through each pending path
-    pendingPaths = pendingPaths.reduce<string[]>((newPendingPaths, pendingPath) => {
-      // rebuild field at path
-      const result = buildParam(parameters, pendingPath, 0);
-      // set the parameter value at path
-      subPath(parameters, pendingPath, result.value);
-      // return any new pending paths
-      return newPendingPaths.concat(result.pendingPaths);
-    }, []);
+    pendingPaths = pendingPaths.reduce<string[]>(
+      (newPendingPaths, pendingPath) => {
+        // rebuild field at path
+        const result = buildParam(parameters, pendingPath, 0);
+        // set the parameter value at path
+        subPath(parameters, pendingPath, result.value);
+        // return any new pending paths
+        return newPendingPaths.concat(result.pendingPaths);
+      },
+      []
+    );
   }
-
 
   // if there are items pending and can still retry, call this
   // function again. Else, just return result
-  return {value, pendingPaths};
-}
+  return { value, pendingPaths };
+};
 
-export const subPath = (param: Parameters, _subPath?: string, setValue?: string | Parameters): Parameters | string => {
+export const subPath = (
+  param: Parameters,
+  _subPath?: string,
+  setValue?: string | Parameters
+): Parameters | string => {
   // if no subpath, just return current param
   if (!_subPath) return param;
   // break subpath by ".", and drill down each level,
   // returning final level
-  return _subPath.split('.').reduce((p: Parameters| string, path, index) => {
-    if (typeof p === 'string') {
+  return _subPath.split(".").reduce((p: Parameters | string, path, index) => {
+    if (typeof p === "string") {
       // if p is a string, we can't get path of p, so throw error
       throw new Error(`invalid handlebar path: ${_subPath}`);
     } else {
-      if (setValue && _subPath.split('.').length - 1 === index) {
+      if (setValue && _subPath.split(".").length - 1 === index) {
         p[path] = setValue;
       }
       // else return the path at p
       return p[path];
     }
   }, param);
-}
+};
