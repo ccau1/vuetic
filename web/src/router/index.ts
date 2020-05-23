@@ -23,6 +23,11 @@ export const routes: Array<RouteConfig> = [
     path: "/todos",
     name: "Todos",
     component: () => import("@/views/Todos.vue")
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login.vue")
   }
 ];
 

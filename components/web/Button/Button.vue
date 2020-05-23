@@ -1,6 +1,7 @@
 <template>
   <button
     @click="$emit('click', $event)"
+    :disabled="disabled"
     :style="style"
     :class="[
       'status-' + (this.status || 'primary'),
@@ -29,10 +30,12 @@ export default {
           "danger"
         ].includes(val)
     },
+    disabled: Boolean,
     rounded: {
       default: null,
       type: Boolean
-    }
+    },
+    full: Boolean
   },
   inject: ["theme"],
   computed: {
@@ -49,6 +52,10 @@ export default {
           this.theme?.components?.button?.defaultRounded)
       ) {
         style.borderRadius = "8px";
+      }
+
+      if (this.full) {
+        style.width = "100%";
       }
 
       return style;

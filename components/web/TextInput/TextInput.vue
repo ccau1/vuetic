@@ -14,6 +14,7 @@
     <div class="input-error-container">
       <input
         ref="input"
+        :type="inputType"
         :placeholder="_placeholder"
         :value="value"
         @input="text => $emit('input', text)"
@@ -41,9 +42,11 @@ export default {
     },
     error: String,
     horizontal: Boolean,
+    input: Function,
     enter: Function,
     blur: Function,
-    focus: Function
+    focus: Function,
+    secureTextEntry: Boolean
   },
   inject: ["theme"],
   directives: { ClickOutside },
@@ -62,11 +65,15 @@ export default {
         (this.rounded === null &&
           this.theme?.components?.textInput?.defaultRounded)
       );
+    },
+    inputType() {
+      return this.secureTextEntry ? "password" : "text";
     }
   },
   data: function() {
     return {
-      isFloated: false
+      isFocused: false,
+      isFloated: Boolean(this.value)
     };
   },
   methods: {
@@ -75,16 +82,20 @@ export default {
       this.$refs.input.focus();
       // set floating to true
       this.isFloated = true;
+      this.isFocused = true;
       // notify parent focus
       this.$emit("focus");
     },
     onBlur: function() {
       // notify parent blur
-      this.$emit("blur");
+      if (this.isFocused) {
+        this.$emit("blur");
+      }
       // only set float to false if there's no value
       if (!this.value) {
         this.isFloated = false;
       }
+      this.isFocused = false;
     }
   }
 };

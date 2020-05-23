@@ -77,6 +77,7 @@ export default {
     // FIXME: horrific way to define styles. Should make use of
     // data/computed to handle this. Also seems to block parent
     // style attr?
+    if (!context.data.attrs) context.data.attrs = {};
     context.data.attrs.style = context.data.attrs.style || "";
     if (context.props.background) {
       const capitalizeText =

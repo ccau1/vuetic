@@ -56,6 +56,36 @@ export class Api implements ApiSauce {
     return this.config;
   }
 
+  public injectInterceptors(interceptors?: ApiInterceptorFactory[]): Api {
+    const config = this.getConfig();
+    if (!this.api?.axiosInstance.interceptors) {
+      // api not setup, throw error
+      throw new Error("api not setup");
+    }
+    const axiosInterceptors = this.api?.axiosInstance.interceptors;
+
+    (interceptors || config.interceptors)?.map(
+      (Interceptor: ApiInterceptorFactory) => {
+        const interceptor: ApiInterceptor = new Interceptor();
+        if (!config.debug && interceptor.debugOnly) return;
+        if (interceptor.request) {
+          axiosInterceptors.request.use(
+            interceptor.request,
+            interceptor.whenError
+          );
+        }
+        if (interceptor.response) {
+          axiosInterceptors.response.use(
+            interceptor.response,
+            interceptor.whenError
+          );
+        }
+      }
+    );
+
+    return this;
+  }
+
   protected _getDefaultConfig() {
     return {
       interceptors: []
@@ -80,24 +110,7 @@ export class Api implements ApiSauce {
       }
     }
 
-    const axiosInterceptors = this.api.axiosInstance.interceptors;
-
-    config.interceptors?.map((Interceptor: ApiInterceptorFactory) => {
-      const interceptor: ApiInterceptor = new Interceptor();
-      if (!config.debug && interceptor.debugOnly) return;
-      if (interceptor.request) {
-        axiosInterceptors.request.use(
-          interceptor.request,
-          interceptor.whenError
-        );
-      }
-      if (interceptor.response) {
-        axiosInterceptors.response.use(
-          interceptor.response,
-          interceptor.whenError
-        );
-      }
-    });
+    this.injectInterceptors(config.interceptors);
 
     return this;
   }

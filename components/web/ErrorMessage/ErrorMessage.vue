@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  name: "ErrorMessage",
-  props: ["icon", "accessory"]
+  name: "ErrorMessage"
 };
 </script>
 
