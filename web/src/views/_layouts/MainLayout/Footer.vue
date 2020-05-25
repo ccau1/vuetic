@@ -27,6 +27,7 @@ export default {
 
 <style scoped>
 footer {
+  text-align: center;
   padding: 20px;
 }
 .container-inner {

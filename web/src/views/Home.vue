@@ -14,3 +14,9 @@ export default {
   components: { MainLayout }
 };
 </script>
+
+<style scoped>
+.home {
+  text-align: center;
+}
+</style>

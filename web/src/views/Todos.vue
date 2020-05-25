@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
     <div class="container">
-      <img alt="Vue logo" src="../assets/logo.png" />
+      <img class="logo" alt="Vue logo" src="../assets/logo.png" />
       <TodoForm />
       <Spacer height="10px" />
       <TodoList />
@@ -27,6 +27,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  margin: 0 auto;
+}
+.logo {
+  display: block;
   margin: 0 auto;
 }
 </style>

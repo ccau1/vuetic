@@ -1,6 +1,8 @@
 <template>
-  <main :style="style">
-    <slot />
+  <main>
+    <div class="main-inner" :style="mainInnerStyle">
+      <slot />
+    </div>
   </main>
 </template>
 
@@ -8,22 +10,22 @@
 export default {
   inject: ["theme"],
   computed: {
-    style() {
-      const containerStyle = {};
-      containerStyle.width = this.theme?.dimensions?.contentMaxWidth
+    mainInnerStyle() {
+      const mainInnerStyle = {};
+      mainInnerStyle.width = this.theme?.dimensions?.contentMaxWidth
         ? this.theme.dimensions.contentMaxWidth + "px"
         : "auto";
 
-      containerStyle.paddingRight = containerStyle.paddingLeft =
+      mainInnerStyle.paddingRight = mainInnerStyle.paddingLeft =
         (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px";
-      containerStyle.paddingTop = containerStyle.paddingBottom =
+      mainInnerStyle.paddingTop = mainInnerStyle.paddingBottom =
         (this.theme?.dimensions?.contentVerticalPadding || 0) + "px";
 
-      containerStyle.backgroundColor =
+      mainInnerStyle.backgroundColor =
         this.theme?.colors?.backgroundContent || "#fff";
-      containerStyle.color = this.theme?.colors?.text?.bgContent || "#000";
+      mainInnerStyle.color = this.theme?.colors?.text?.bgContent || "#000";
 
-      return containerStyle;
+      return mainInnerStyle;
     }
   }
 };
@@ -31,9 +33,11 @@ export default {
 
 <style scoped>
 main {
+  overflow-y: auto;
+}
+.main-inner {
   flex: 1;
   margin: 0 auto;
-  overflow-y: auto;
   max-width: 100%;
   box-sizing: border-box;
 }
