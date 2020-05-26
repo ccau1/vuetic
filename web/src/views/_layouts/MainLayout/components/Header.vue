@@ -1,6 +1,14 @@
 <template>
   <header :style="headerStyle">
     <div class="header-inner" :style="headerInnerStyle">
+      <a class="menu-icon" @click="$emit('toggleSideBar', !isSideBarOpen)">
+        <FontAwesomeIcon v-if="!isSideBarOpen" icon="bars" class="menu-icon" />
+        <FontAwesomeIcon
+          v-if="isSideBarOpen"
+          icon="chevron-left"
+          class="menu-icon"
+        />
+      </a>
       <div class="logo">
         <router-link class="logo-link" to="/">
           <img
@@ -8,7 +16,16 @@
             src="https://www.buffalowildwings.com/globalassets/bww-logo_rgb_icon.png"
           />
           <Spacer width="5px" />
-          <Typography category="h1" background="primary">App Title</Typography>
+          <!-- <div class="logo-title"> -->
+          <Typography
+            v-if="title"
+            class="logo-title"
+            category="h1"
+            background="primary"
+          >
+            {{ title }}
+          </Typography>
+          <!-- </div> -->
         </router-link>
       </div>
       <div class="left-side">
@@ -28,23 +45,32 @@
 import LocaleSwitcher from "@/containers/Locale/LocaleSwitcher.vue";
 import ThemeSwitcher from "@/containers/Theme/ThemeSwitcher.vue";
 import Menu from "./Menu.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faBars, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faBars);
+library.add(faChevronLeft);
 
 export default {
-  components: { LocaleSwitcher, ThemeSwitcher, Menu },
+  components: { FontAwesomeIcon, LocaleSwitcher, ThemeSwitcher, Menu },
   inject: ["theme"],
+  props: {
+    isSideBarOpen: Boolean,
+    toggleSideBar: Function,
+    title: String
+  },
   data() {
     const headerStyle = {
-      backgroundColor: this.theme?.colors?.primary || "#fea",
+      backgroundColor: this.theme?.layout?.headerBg || "#fea",
       color: this.theme?.colors?.text?.bgPrimary || "#000",
-      paddingLeft:
-        (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px",
-      paddingRight:
-        (this.theme?.dimensions?.contentHorizontalPadding || 0) + "px"
+      paddingLeft: (this.theme?.layout?.contentHorizontalPadding || 0) + "px",
+      paddingRight: (this.theme?.layout?.contentHorizontalPadding || 0) + "px"
     };
 
     const headerInnerStyle = {};
-    if (this.theme?.dimensions?.contentMaxWidth) {
-      headerInnerStyle.maxWidth = this.theme.dimensions.contentMaxWidth + "px";
+    if (this.theme?.layout?.contentMaxWidth) {
+      headerInnerStyle.maxWidth = this.theme.layout.contentMaxWidth + "px";
     }
 
     return { headerStyle, headerInnerStyle };
@@ -52,9 +78,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 header {
   padding: 10px 0px;
+  user-select: none;
+
+  & .menu-icon {
+    width: 24px;
+    padding: 10px 10px 10px 0;
+  }
 
   & > .header-inner {
     display: flex;
@@ -85,6 +117,11 @@ header {
     flex-direction: row;
     flex: 1;
     justify-content: flex-end;
+  }
+  & .logo-title {
+    @media screen and (max-width: 950px) {
+      display: none;
+    }
   }
 }
 </style>

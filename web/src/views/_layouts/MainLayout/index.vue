@@ -1,21 +1,11 @@
 <template>
-  <LayoutContainer>
-    <Header />
-    <Main>
-      <slot />
-    </Main>
-    <Footer />
-  </LayoutContainer>
+  <Layout><slot /></Layout>
 </template>
 
 <script>
-import LayoutContainer from "./LayoutContainer.vue";
-import Header from "./Header.vue";
-import Main from "./Main.vue";
-import Footer from "./Footer.vue";
-
+import Layout from "./containers/Layout.vue";
 export default {
-  components: { LayoutContainer, Header, Main, Footer }
+  components: { Layout }
 };
 </script>
 

@@ -11,14 +11,13 @@ export default {
   inject: ["theme"],
   data() {
     const footerStyle = {
-      backgroundColor: this.theme?.colors?.primary || "#fea",
+      backgroundColor: this.theme?.layout?.footerBg || "#fea",
       color: this.theme?.colors?.text?.bgPrimary || "#000"
     };
 
     const containerInnerStyle = {};
-    if (this.theme?.dimensions?.contentMaxWidth) {
-      containerInnerStyle.maxWidth =
-        this.theme?.dimensions?.contentMaxWidth + "px";
+    if (this.theme?.layout?.contentMaxWidth) {
+      containerInnerStyle.maxWidth = this.theme?.layout?.contentMaxWidth + "px";
     }
     return { containerInnerStyle, footerStyle };
   }

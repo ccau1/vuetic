@@ -29,10 +29,18 @@ export default {
     }
   },
   dimensions: {
-    scale: 1.5,
-    contentMaxWidth: "$scale * 700",
-    contentHorizontalPadding: "$scale * 5",
-    contentVerticalPadding: "$scale * 30"
+    scale: 1
+  },
+  layout: {
+    contentMaxWidth: "$$dimensions.scale * 1100",
+    contentHorizontalPadding: "$$dimensions.scale * 5",
+    contentVerticalPadding: "$$dimensions.scale * 60",
+    headerBg: "$$colors.primary",
+    footerBg: "$$colors.primary",
+    sideBarBg: "$$colors.background",
+    sideBarColor: "$$colors.text.bgDark",
+    sideBarVerticalPadding: "$$dimensions.scale * 60",
+    sideBarSeparatorColor: "rgba(255, 255, 255, 0.1)"
   },
   components: {
     typography: {
