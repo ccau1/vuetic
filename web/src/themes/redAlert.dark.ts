@@ -31,6 +31,13 @@ export default {
   dimensions: {
     scale: 1
   },
+  breakpoints: {
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 1280,
+    xl: 1920
+  },
   layout: {
     contentMaxWidth: "$$dimensions.scale * 1100",
     contentHorizontalPadding: "$$dimensions.scale * 5",

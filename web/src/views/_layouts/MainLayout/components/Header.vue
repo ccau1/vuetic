@@ -1,13 +1,9 @@
 <template>
   <header :style="headerStyle">
     <div class="header-inner" :style="headerInnerStyle">
-      <a class="menu-icon" @click="$emit('toggleSideBar', !isSideBarOpen)">
-        <FontAwesomeIcon v-if="!isSideBarOpen" icon="bars" class="menu-icon" />
-        <FontAwesomeIcon
-          v-if="isSideBarOpen"
-          icon="chevron-left"
-          class="menu-icon"
-        />
+      <a class="menu-icon" @click="onMenuIconClick">
+        <FontAwesomeIcon v-if="!isSideBarOpen" icon="bars" fixed-width />
+        <FontAwesomeIcon v-if="isSideBarOpen" icon="chevron-left" fixed-width />
       </a>
       <div class="logo">
         <router-link class="logo-link" to="/">
@@ -20,11 +16,11 @@
           <Typography
             v-if="title"
             class="logo-title"
+            v-breakpoint:show="['md', 'lg', 'xl']"
             category="h1"
             background="primary"
+            >{{ title }}</Typography
           >
-            {{ title }}
-          </Typography>
           <!-- </div> -->
         </router-link>
       </div>
@@ -74,6 +70,12 @@ export default {
     }
 
     return { headerStyle, headerInnerStyle };
+  },
+  methods: {
+    onMenuIconClick(ev) {
+      ev.stopPropagation();
+      this.$emit("toggleSideBar", !this.isSideBarOpen);
+    }
   }
 };
 </script>
@@ -119,9 +121,6 @@ header {
     justify-content: flex-end;
   }
   & .logo-title {
-    @media screen and (max-width: 950px) {
-      display: none;
-    }
   }
 }
 </style>

@@ -11,6 +11,13 @@ export interface Theme {
   dimensions: {
     scale: string | number;
   };
+  breakpoints: {
+    xs: string | number;
+    sm: string | number;
+    md: string | number;
+    lg: string | number;
+    xl: string | number;
+  };
   layout: {
     contentMaxWidth: string | number;
     contentHorizontalPadding: string | number;

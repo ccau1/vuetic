@@ -2,13 +2,21 @@
   <div>
     <label>
       <label>
-        <input type="checkbox" :checked="isThemeDark" @change="setIsThemeDark(!isThemeDark)" />
+        <input
+          type="checkbox"
+          :checked="isThemeDark"
+          @change="setIsThemeDark(!isThemeDark)"
+        />
         Is Dark
       </label>
       <!-- <Checkbox :selected="isThemeDark" label="Is Dark" @change="_setIsThemeDark(!isThemeDark)" /> -->
     </label>
     <div class="theme-box-list-container">
-      <div v-for="(theme, key, index) in themes" :key="key" class="theme-box-list-item">
+      <div
+        v-for="(theme, key, index) in themes"
+        :key="key"
+        class="theme-box-list-item"
+      >
         <Spacer v-if="index > 0" width="5px" />
         <div
           @click="setTheme(key.replace(/\.dark$/, ''))"

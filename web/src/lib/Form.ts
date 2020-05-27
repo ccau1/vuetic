@@ -38,7 +38,7 @@ export default class Form {
     // they are the same thing
     this.resetForm(options);
   }
-
+  // eslint-disable-next-line
   public onChange = (fieldName: string) => (ev: any) => {
     if (!this.values[fieldName]) {
       // FIXME: vue specific call. Can library be agnostic?
@@ -95,7 +95,6 @@ export default class Form {
       formState.$dirty = true;
       return formState;
     });
-    console.log("handling 2", this.formState);
     const result = await this.options.onSubmit?.(this.values);
     // this.formState.$pending = false;
     return result;
@@ -161,8 +160,6 @@ export default class Form {
   }
 
   protected _generateFormState(values: FormValues = this.values) {
-    console.log("hoi", values);
-
     const formState: FormState = {
       $pristine: true,
       $dirty: false,

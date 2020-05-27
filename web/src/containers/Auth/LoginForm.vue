@@ -8,6 +8,8 @@
       @blur="onBlur('input')"
       label="Username"
       :error="errors.input"
+      v-focus
+      full
     />
     <TextInput
       :value="values.password"
@@ -17,6 +19,7 @@
       secureTextEntry
       label="Password"
       :error="errors.password"
+      full
     />
     <label
       ><input

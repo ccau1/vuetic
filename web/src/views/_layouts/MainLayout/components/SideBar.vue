@@ -40,6 +40,7 @@ aside {
     left: 0;
     height: 100%;
     z-index: 100;
+    box-shadow: 1px 1px 40px -4px rgba(0, 0, 0, 0.5);
   }
 }
 </style>
