@@ -1,4 +1,3 @@
-import Vue from "vue";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 
@@ -7,6 +6,7 @@ const requireComponent = require.context(".", true, /[\w-]+\.vue$/);
 
 export default requireComponent
   .keys()
+  // eslint-disable-next-line
   .reduce<{ [componentName: string]: any }>((obj, fileName) => {
     // get component config
     const componentConfig = requireComponent(fileName);

@@ -1,5 +1,5 @@
 import { create, ApisauceInstance } from "apisauce";
-import TokenManager from "./TokenManager";
+import TokenManager, { TokenManagerConfig } from "./TokenManager";
 import ApiInterceptor, {
   ApiInterceptorFactory
 } from "./ApiInterceptors/ApiInterceptors";
@@ -14,13 +14,9 @@ export interface ApiConfig {
   interceptors?: ApiInterceptorFactory[];
 }
 
-interface ApiSauce {
-  [key: string]: any;
-}
-
-export class Api implements ApiSauce {
+export class Api {
   protected config: ApiConfig = { baseURL: "" };
-  protected api?: ApisauceInstance;
+  protected api: ApisauceInstance = create({ baseURL: "" });
   protected tokenManager?: TokenManager;
   constructor(config: ApiConfig) {
     // Save constructor parameters
@@ -29,6 +25,7 @@ export class Api implements ApiSauce {
       ...config
     });
     this.setTokenManager(new TokenManager());
+    this.setTokenConfig({});
     // this.requestInterceptors = [];
     // this.resonseInterceptors = [];
 
@@ -36,9 +33,13 @@ export class Api implements ApiSauce {
     this._initApi();
   }
 
+  public setTokenConfig(tokenConfig: TokenManagerConfig): Api {
+    this.tokenManager?.setConfig(tokenConfig);
+    return this;
+  }
+
   public setTokenManager(tokenManager: TokenManager): Api {
     this.tokenManager = tokenManager;
-    this.tokenManager.setConfig(this.getConfig());
     this.tokenManager.start();
     return this;
   }
@@ -86,6 +87,16 @@ export class Api implements ApiSauce {
     return this;
   }
 
+  public get = this.api?.get;
+  public put = this.api?.put;
+  public post = this.api?.post;
+  public delete = this.api?.delete;
+  public head = this.api?.head;
+  public patch = this.api?.patch;
+  public link = this.api?.link;
+  public unlink = this.api?.unlink;
+  public getBaseURL = this.api?.getBaseURL;
+
   protected _getDefaultConfig() {
     return {
       interceptors: []
@@ -95,21 +106,6 @@ export class Api implements ApiSauce {
   protected _initApi(): Api {
     const config = this.getConfig();
     this.api = create(config);
-    for (const name in this.api) {
-      if (this.api.hasOwnProperty(name)) {
-        Object.defineProperty(this, name, {
-          get: () => {
-            return (this.api as any)?.[name];
-          },
-          set: (value: any) => {
-            if (this.api && (this.api as any)?.[name] !== value) {
-              (this.api as any)[name] = value;
-            }
-          }
-        });
-      }
-    }
-
     this.injectInterceptors(config.interceptors);
 
     return this;

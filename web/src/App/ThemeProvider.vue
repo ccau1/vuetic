@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ThemeProvider from "@components/web/ThemeProvider.vue";
+import ThemeProvider from "@vuetic/components/web/ThemeProvider.vue";
 import themes from "@/themes";
 import { mapGetters } from "vuex";
 

@@ -1,4 +1,4 @@
-import { Theme } from "@components/web";
+import { Theme } from "@vuetic/components/web";
 
 export default {
   colors: {

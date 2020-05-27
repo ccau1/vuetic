@@ -2,11 +2,10 @@ import { AxiosResponse } from "axios";
 import ApiInterceptor, { ApiInterceptorError } from "./ApiInterceptors";
 
 class LoggerInterceptor implements ApiInterceptor {
-  constructor() {}
-  debugOnly: boolean = true;
+  debugOnly = true;
   response = (
-    response: AxiosResponse<any>
-  ): AxiosResponse<any> | Promise<AxiosResponse<any>> => {
+    response: AxiosResponse
+  ): AxiosResponse | Promise<AxiosResponse> => {
     if (response.status) console.log(response);
     return response;
   };

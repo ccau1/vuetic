@@ -28,6 +28,7 @@
 <script>
 import ClickOutside from "vue-click-outside";
 import ErrorMessage from "../ErrorMessage";
+
 export default {
   name: "TextInput",
   props: {

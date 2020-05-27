@@ -1,7 +1,15 @@
-export interface TokenManagerConfig {}
+export interface TokenManagerConfig {
+  cookieName?: string;
+  cookieExpire?: number;
+}
 
 export default class TokenManager {
-  public setConfig(config: TokenManagerConfig) {}
+  protected _config: TokenManagerConfig = {};
+  public setConfig(config: TokenManagerConfig) {
+    this._config = config;
+  }
 
-  public start() {}
+  public start() {
+    return null;
+  }
 }

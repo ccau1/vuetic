@@ -1,5 +1,7 @@
 import camelCase from "lodash/camelCase";
 const requireModule = require.context(".", false, /\.ts$/);
+
+// eslint-disable-next-line
 const modules: { [key: string]: any } = {};
 
 requireModule.keys().forEach((fileName: string) => {

@@ -1,14 +1,7 @@
 import { ActionContext } from "vuex";
 import { addTodo, findTodos, deleteTodo, updateTodo } from "../apis/todoApi";
 import { RootState } from ".";
-
-interface Todo {
-  _id: string;
-  text: string;
-  isCompleted: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { Todo } from "@/typings";
 
 export interface TodoState {
   items: Todo[];
@@ -54,7 +47,7 @@ const actions = {
     { commit }: ActionContext<TodoState, RootState>,
     payload: { _id: string }
   ) {
-    const deletedTodo = await deleteTodo(payload._id);
+    await deleteTodo(payload._id);
     commit("deleteTodo", { _id: payload._id });
   }
 };

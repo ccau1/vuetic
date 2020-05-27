@@ -1,6 +1,6 @@
 import { ActionContext } from "vuex";
 import { RootState } from ".";
-import { getUserToken } from "../apis/authApi";
+// import { getUserToken } from "../apis/authApi";
 
 export interface LayoutState {
   isSideBarOpen: boolean;

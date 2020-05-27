@@ -1,7 +1,34 @@
-export const COMPUTE_REGEX = /(\$|\$\$|@)([\w_\d\.]+)/;
+export const COMPUTE_REGEX = /(\$|\$\$|@)([\w_\d.]+)/;
 
 type Parameters = { [key: string]: string | Parameters };
 // type ParameterArrayItem = {key: string, field: string};
+
+export const subPath = (
+  param: Parameters,
+  _subPath?: string,
+  setValue?: string | Parameters
+): Parameters | string => {
+  // if no subpath, just return current param
+  if (!_subPath) return param;
+  // break subpath by ".", and drill down each level,
+  // returning final level
+  return _subPath.split(".").reduce((p: Parameters | string, path, index) => {
+    if (typeof p === "string") {
+      // if p is a string, we can't get path of p, so throw error
+      throw new Error(`invalid handlebar path: ${_subPath}`);
+    } else {
+      if (setValue && _subPath.split(".").length - 1 === index) {
+        p[path] = setValue;
+      }
+      // else return the path at p
+      return p[path];
+    }
+  }, param);
+};
+
+export const capitalizeText = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 export const buildParam = (
   parameters: Parameters,
@@ -128,31 +155,4 @@ export const buildParam = (
   // if there are items pending and can still retry, call this
   // function again. Else, just return result
   return { value, pendingPaths };
-};
-
-export const subPath = (
-  param: Parameters,
-  _subPath?: string,
-  setValue?: string | Parameters
-): Parameters | string => {
-  // if no subpath, just return current param
-  if (!_subPath) return param;
-  // break subpath by ".", and drill down each level,
-  // returning final level
-  return _subPath.split(".").reduce((p: Parameters | string, path, index) => {
-    if (typeof p === "string") {
-      // if p is a string, we can't get path of p, so throw error
-      throw new Error(`invalid handlebar path: ${_subPath}`);
-    } else {
-      if (setValue && _subPath.split(".").length - 1 === index) {
-        p[path] = setValue;
-      }
-      // else return the path at p
-      return p[path];
-    }
-  }, param);
-};
-
-export const capitalizeText = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };

@@ -23,7 +23,10 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "node_modules/@vuetic/**/*.ts",
+    "node_modules/@vuetic/**/*.tsx",
+    "node_modules/@vuetic/**/*.vue"
   ],
   "exclude": ["node_modules"]
 }

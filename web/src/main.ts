@@ -3,7 +3,7 @@ import App from "./App";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import components from "@components/web/_global";
+import components from "@vuetic/components/web/_global";
 import directives from "./directives";
 import { i18n } from "./locales/i18n";
 import { Plugin as FragmentPlugin } from "vue-fragment";
