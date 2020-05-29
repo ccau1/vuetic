@@ -58,7 +58,7 @@ export const buildParam = (
           case "$":
             scopedParameters = subPath(
               parameters,
-              _subPath?.split(".").shift()
+              _subPath ? _subPath.split(".").shift() : undefined
             ) as Parameters;
             break;
           case "$$":
@@ -68,9 +68,11 @@ export const buildParam = (
             scopedParameters = subPath(
               parameters,
               _subPath
-                ?.split(".")
-                .slice(0, -1)
-                .join(".")
+                ? _subPath
+                    .split(".")
+                    .slice(0, -1)
+                    .join(".")
+                : undefined
             ) as Parameters;
             break;
         }
@@ -155,4 +157,26 @@ export const buildParam = (
   // if there are items pending and can still retry, call this
   // function again. Else, just return result
   return { value, pendingPaths };
+};
+
+export const story = (StoryComponent, options = {}) => {
+  // Get the `withSource` option, default to true. Making this an option
+  // allows us to opt-out of displaying the source of a story.
+  const { withSource } = Object.assign({ withSource: true }, options);
+
+  // The story export that Storybook will use
+  const storyExport = () => StoryComponent;
+
+  // Attach the source as a story paramter
+  if (withSource) {
+    storyExport.story = {
+      parameters: {
+        // `.__source` is from our custom <include-source> SFC block
+        // and webpack loader
+        source: StoryComponent.__source
+      }
+    };
+  }
+
+  return storyExport;
 };

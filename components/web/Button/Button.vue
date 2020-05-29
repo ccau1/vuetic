@@ -5,7 +5,8 @@
     :style="style"
     :class="[
       'status-' + (this.status || 'primary'),
-      { rounded: this.rounded !== undefined }
+      { rounded: this.rounded !== undefined && this.rounded !== false },
+      { disabled: this.disabled !== undefined && this.disabled !== false }
     ]"
   >
     <slot />
@@ -14,6 +15,7 @@
 
 <script>
 import { capitalizeText } from "../utils";
+
 export default {
   name: "Button",
   props: {
@@ -67,8 +69,9 @@ export default {
 <style lang="scss" scoped>
 button {
   position: relative;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
   padding: 13px 20px;
+
   &:focus {
     outline: none;
   }
@@ -81,6 +84,16 @@ button {
     height: 100%;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &.disabled::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
   // &.status-primary {
   //   background-color: #42b882;

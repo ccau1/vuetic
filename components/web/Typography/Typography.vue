@@ -46,6 +46,7 @@ export default {
   functional: true,
   render(h, context) {
     let tag = "p";
+    console.log("huhhh", context);
 
     switch (context.props.category) {
       case "h1":

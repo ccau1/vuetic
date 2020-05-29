@@ -1,6 +1,5 @@
 <script>
 import Vue from "vue";
-import { mapGetters } from "vuex";
 import { buildParam } from "./utils";
 
 export default {

@@ -32,7 +32,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("https://i.imgur.com/81RTZEw.png");
+  background-image: url("https://www.vibutechnix.com/projectms/application/themes/default/common/images/login-background.jpg");
   background-position: center center;
 }
 .page-background.blurred {
