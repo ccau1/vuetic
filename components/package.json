@@ -29,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/vue": "^5.3.19",
@@ -44,6 +45,8 @@
     "eslint": "^6.7.2",
     "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
+    "react": "^16.13.1",
+    "react-is": "^16.13.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "ts-loader": "^7.0.5",

@@ -1,15 +1,24 @@
 <template>
-  <div class="dd-container" :style="containerStyle" :class="'direction-' + direction"
-      @mouseenter="onMouseEnterButton"
-      @mouseleave="onMouseLeaveButton">
+  <div
+    class="dd-container"
+    :style="containerStyle"
+    :class="'direction-' + direction"
+    @mouseenter="onMouseEnterButton"
+    @mouseleave="onMouseLeaveButton"
+  >
     <div class="dd-item-wrapper">
       <DropdownItem
-        :text="text"
+        :text="'a' + text"
         @click="buttonClick"
         v-click-outside="() => setIsOpen(false)"
-        :style="[buttonStyle, {paddingRight: '28px'}]"
-        />
-      <FontAwesomeIcon :transform="{ rotate: iconRotation }" class="dd-text-icon" size="sm" icon="chevron-down" />
+        :style="[buttonStyle, { paddingRight: '28px' }]"
+      />
+      <FontAwesomeIcon
+        :transform="{ rotate: iconRotation }"
+        class="dd-text-icon"
+        size="sm"
+        icon="chevron-down"
+      />
     </div>
     <div class="dd-content-container">
       <div class="dd-content" v-if="isOpen" :style="contentStyle">
@@ -27,13 +36,13 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 library.add(faChevronDown);
 
 export default {
-  name: 'Dropdown',
+  name: "Dropdown",
   props: {
     text: String,
     direction: {
       default: "bottom",
       type: String,
-      enum: ['left', 'right', 'top', 'bottom']
+      enum: ["left", "right", "top", "bottom"]
     },
     openOnHover: {
       type: Boolean,
@@ -88,11 +97,11 @@ export default {
   computed: {
     buttonStyle() {
       const buttonStyle = {};
-      if (this.$parent.$options.name !== 'Dropdown') {
+      if (this.$parent.$options.name !== "Dropdown") {
         // if parent is not a dropdown, make it look
         // more like a dropdown button
-        buttonStyle.border = '1px solid rgba(0, 0, 0, 0.3)';
-        buttonStyle.borderRadius = '5px';
+        buttonStyle.border = "1px solid rgba(0, 0, 0, 0.3)";
+        buttonStyle.borderRadius = "5px";
       }
       return buttonStyle;
     },
@@ -100,27 +109,30 @@ export default {
       const contentStyle = {};
       if (this.backgroundColor) {
         contentStyle.backgroundColor = this.backgroundColor;
-      } else if (this.$parent.$options.name === 'Dropdown' && this.$parent.backgroundColor) {
+      } else if (
+        this.$parent.$options.name === "Dropdown" &&
+        this.$parent.backgroundColor
+      ) {
         // if parent is a dropdown and has props backgroundColor,
         // follow it
         contentStyle.backgroundColor = this.$parent.backgroundColor;
       }
 
       switch (this.direction) {
-        case 'left':
+        case "left":
           contentStyle.top = 0;
-          contentStyle.right = '2px';
+          contentStyle.right = "2px";
           break;
-        case 'right':
+        case "right":
           contentStyle.top = 0;
-          contentStyle.left = '2px';
+          contentStyle.left = "2px";
           break;
-        case 'bottom':
-          contentStyle.top = '2px';
+        case "bottom":
+          contentStyle.top = "2px";
           contentStyle.left = 0;
           break;
-        case 'top':
-          contentStyle.bottom = '2px';
+        case "top":
+          contentStyle.bottom = "2px";
           contentStyle.left = 0;
           break;
       }
@@ -134,13 +146,13 @@ export default {
     },
     iconRotation() {
       switch (this.direction) {
-        case 'left':
+        case "left":
           return 90;
-        case 'right':
+        case "right":
           return -90;
-        case 'top':
+        case "top":
           return 180;
-        case 'bottom':
+        case "bottom":
         default:
           return 0;
       }

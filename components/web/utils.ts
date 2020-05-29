@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export const COMPUTE_REGEX = /(\$|\$\$|@)([\w_\d.]+)/;
 
 type Parameters = { [key: string]: string | Parameters };
@@ -159,7 +161,10 @@ export const buildParam = (
   return { value, pendingPaths };
 };
 
-export const story = (StoryComponent, options = {}) => {
+export const story = (
+  StoryComponent: Vue.Component & { __source: string },
+  options = {}
+) => {
   // Get the `withSource` option, default to true. Making this an option
   // allows us to opt-out of displaying the source of a story.
   const { withSource } = Object.assign({ withSource: true }, options);
@@ -173,7 +178,14 @@ export const story = (StoryComponent, options = {}) => {
       parameters: {
         // `.__source` is from our custom <include-source> SFC block
         // and webpack loader
-        source: StoryComponent.__source
+        source: StoryComponent.__source,
+        // Default config for the docs tab
+        docs: {
+          inlineStories: true,
+          source: {
+            code: StoryComponent.__source
+          }
+        }
       }
     };
   }

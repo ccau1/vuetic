@@ -7,7 +7,6 @@ import ButtonDisabled from "./ButtonDisabled.story.vue";
 export default {
   title: "Button"
 };
-console.log("story", story);
 
 export const buttonStatus = story(ButtonStatus);
 export const buttonRounded = story(ButtonRounded);

@@ -4,7 +4,6 @@ const path = require("path");
 module.exports = function(source, sourceMap) {
   // `source` (the string in the custom <include-source> block) contains the file path
   // const filePath = path.join(this.query.rootPath, source.trim());
-  console.log("this.resourcePath", this.resourcePath);
 
   // Read the referenced file and remove the <include-source> block, so it doesn't
   // show up in the source code that will be shown in the UI

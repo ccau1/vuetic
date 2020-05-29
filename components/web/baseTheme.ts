@@ -56,7 +56,8 @@ export default {
         success: "$$colors.success",
         info: "$$colors.info",
         danger: "$$colors.danger",
-        warning: "$$colors.warning"
+        warning: "$$colors.warning",
+        hint: "rgba(0, 0, 0, 0.6)"
       }
     },
     button: {

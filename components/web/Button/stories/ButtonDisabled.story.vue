@@ -23,10 +23,6 @@ export default {
 };
 </script>
 
-<style scoped>
-div.container > button {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>
 
 <include-source />

@@ -30,7 +30,6 @@ export default {
 
 <style scoped>
 div.container > button {
-  padding: 10px;
   margin-bottom: 10px;
 }
 </style>

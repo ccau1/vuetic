@@ -1,3 +1,7 @@
+<template>
+  <component :is="tag" :style="style"><slot /></component>
+</template>
+
 <script>
 export default {
   name: "Typography",
@@ -30,74 +34,65 @@ export default {
     background: {
       validate: val =>
         [
-          "bgContent",
-          "bgLight",
-          "bgDark",
-          "bgPrimary",
-          "bgSecondary",
-          "bgInfo",
-          "bgDanger",
-          "bgWarning",
-          "bgSuccess"
+          "content",
+          "light",
+          "dark",
+          "primary",
+          "secondary",
+          "info",
+          "danger",
+          "warning",
+          "success"
         ].includes(val)
     }
   },
   inject: ["theme"],
-  functional: true,
-  render(h, context) {
-    let tag = "p";
-    console.log("huhhh", context);
+  computed: {
+    style() {
+      const style = {};
+      if (this.background) {
+        const capitalizeText =
+          this.background.charAt(0).toUpperCase() + this.background.slice(1);
+        style.color =
+          this.theme?.colors?.text?.[`bg${capitalizeText}`] || "inherit";
+      } else if (this.status) {
+        style.color =
+          this.theme?.components?.typography?.status?.[this.status] ||
+          "inherit";
+      }
 
-    switch (context.props.category) {
-      case "h1":
-      case "h2":
-      case "h3":
-      case "h4":
-        tag = context.props.category;
-        break;
-      case "subtitle1":
-        tag = "h5";
-        break;
-      case "subtitle2":
-        tag = "h6";
-        break;
-      case "body1":
-      case "body2":
-        tag = "p";
-        break;
-      case "caption1":
-      case "caption2":
-        tag = "small";
-        break;
-      case "label1":
-      case "label2":
-        tag = "p";
-        break;
+      return style;
+    },
+    tag() {
+      let tag = "p";
+      switch (this.category) {
+        case "h1":
+        case "h2":
+        case "h3":
+        case "h4":
+          tag = this.category;
+          break;
+        case "subtitle1":
+          tag = "h5";
+          break;
+        case "subtitle2":
+          tag = "h6";
+          break;
+        case "body1":
+        case "body2":
+          tag = "p";
+          break;
+        case "caption1":
+        case "caption2":
+          tag = "small";
+          break;
+        case "label1":
+        case "label2":
+          tag = "p";
+          break;
+      }
+      return tag;
     }
-
-    // FIXME: horrific way to define styles. Should make use of
-    // data/computed to handle this. Also seems to block parent
-    // style attr?
-    if (!context.data.attrs) context.data.attrs = {};
-    context.data.attrs.style = context.data.attrs.style || "";
-    if (context.props.background) {
-      const capitalizeText =
-        context.props.background.charAt(0).toUpperCase() +
-        context.props.background.slice(1);
-      context.data.attrs.style += `
-        color: ${context.injections?.theme?.colors?.text?.[
-          `bg${capitalizeText}`
-        ] || "inherit"};
-      `;
-    } else if (context.props.status) {
-      context.data.attrs.style += `
-        color: ${context.injections?.theme?.components?.typography?.status?.[
-          context.props.status
-        ] || "inherit"};
-      `;
-    }
-
-    return h(tag, context.data, context.children);
   }
 };
 </script>
