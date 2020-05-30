@@ -10,7 +10,7 @@
     v-click-outside="onBlur"
     @click="onFocus"
   >
-    <label>{{ label }}</label>
+    <label v-if="label">{{ label }}</label>
     <div class="input-error-container">
       <input
         ref="input"

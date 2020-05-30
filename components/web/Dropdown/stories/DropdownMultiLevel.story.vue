@@ -6,6 +6,11 @@
         <DropdownItem text="Green" @click="itemClick('Green')" />
         <DropdownItem text="Red" @click="itemClick('Red')" />
         <DropdownSeparator />
+        <Dropdown direction="right" text="Fancy Colors">
+          <DropdownItem text="Teal Green" />
+          <DropdownItem text="Emerald Pink" />
+        </Dropdown>
+        <DropdownSeparator />
         <DropdownItem text="Clear" @click="itemClick('')" />
       </Dropdown>
       <Spacer height="200px" />

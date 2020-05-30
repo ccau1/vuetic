@@ -6,15 +6,19 @@
     @mouseenter="onMouseEnterButton"
     @mouseleave="onMouseLeaveButton"
   >
-    <div class="dd-item-wrapper">
+    <div
+      class="dd-item-wrapper"
+      @click="buttonClick"
+      :class="{ 'label-floated': text }"
+    >
+      <label v-if="label">{{ label }}</label>
       <DropdownItem
         :text="text"
-        @click="buttonClick"
         v-click-outside="() => setIsOpen(false)"
         :style="[buttonStyle, { paddingRight: '28px' }]"
       />
       <FontAwesomeIcon
-        :transform="{ rotate: iconRotation }"
+        :style="arrowIconStyle"
         class="dd-text-icon"
         size="sm"
         icon="chevron-down"
@@ -58,6 +62,9 @@ export default {
       type: Function
     },
     backgroundColor: {
+      type: String
+    },
+    label: {
       type: String
     }
   },
@@ -147,18 +154,29 @@ export default {
 
       return containerStyle;
     },
-    iconRotation() {
+    arrowIconRotation() {
+      let rotation = 0;
       switch (this.direction) {
         case "left":
-          return 90;
+          rotation = this.isOpen ? -90 : 90;
+          break;
         case "right":
-          return -90;
+          rotation = this.isOpen ? 90 : -90;
+          break;
         case "top":
-          return 180;
+          rotation = this.isOpen ? 0 : 180;
+          break;
         case "bottom":
         default:
-          return 0;
+          rotation = this.isOpen ? 180 : 0;
       }
+      return rotation;
+    },
+    arrowIconStyle() {
+      const style = {};
+      style.transform = `rotate(${this.arrowIconRotation}deg) translateY(-50%)`;
+
+      return style;
     }
   }
 };
@@ -182,13 +200,41 @@ export default {
   }
 }
 .dd-item-wrapper {
+  min-height: 40px;
 }
+.dd-item-wrapper label {
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  padding: 2px 10px;
+  z-index: 1;
+  opacity: 0.4;
+  user-select: none;
+  background-color: transparent;
+  color: #000;
+
+  transition: all 300ms;
+}
+.label-floated label {
+  top: -10px;
+  transform: scale(0.8) translateX(-4%);
+  opacity: 1;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+}
+.dd-item {
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
 .dd-text-icon {
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
   pointer-events: none;
+  transform-origin: 50% 0%;
+  transition: all 500ms ease-out;
 }
 .dd-button {
   padding: 10px 15px;
