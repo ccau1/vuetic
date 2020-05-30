@@ -5,9 +5,13 @@ import { TodoModule } from './modules/Todo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/Auth/auth.module';
 import { UserModule } from './modules/User/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     MongooseModule.forRoot('mongodb://localhost:27017/vuetic', {
       useCreateIndex: true,
       useNewUrlParser: true,

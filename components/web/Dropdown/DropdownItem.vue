@@ -1,13 +1,13 @@
 <template>
-  <div class="dd-item" :class="{active, disabled}" v-on="listeners">
-    {{text}}
+  <div class="dd-item" :class="{ active, disabled }" v-on="listeners">
+    {{ text }}
     <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DropdownItem',
+  name: "DropdownItem",
   props: {
     active: Boolean,
     disabled: Boolean,
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     listeners() {
-      return {...this.$listeners};
+      return { ...this.$listeners };
     }
   }
 };

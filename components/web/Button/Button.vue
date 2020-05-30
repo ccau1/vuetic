@@ -71,6 +71,7 @@ button {
   position: relative;
   border: 0px solid transparent;
   padding: 13px 20px;
+  height: fit-content;
 
   &:focus {
     outline: none;

@@ -19,8 +19,7 @@
             v-breakpoint:show="['md', 'lg', 'xl']"
             category="h1"
             background="primary"
-            >{{ title }}</Typography
-          >
+          >{{ title }}</Typography>
           <!-- </div> -->
         </router-link>
       </div>
@@ -29,6 +28,15 @@
         <Menu />
       </div>
       <div class="right-side">
+        <UserLoggedInShow>
+          <CurrentUserTag />
+          <Spacer width="5px" />
+          <LogoutButton />
+        </UserLoggedInShow>
+        <UserLoggedInHide>
+          <Button @click="login">Login</Button>
+        </UserLoggedInHide>
+        <Spacer width="10px" />
         <ThemeSwitcher />
         <Spacer width="10px" />
         <LocaleSwitcher />
@@ -44,12 +52,25 @@ import Menu from "./Menu.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBars, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import CurrentUserTag from "@/containers/User/CurrentUserTag.vue";
+import UserLoggedInShow from "@/containers/Auth/UserLoggedInShow.vue";
+import UserLoggedInHide from "@/containers/Auth/UserLoggedInHide.vue";
+import LogoutButton from "@/containers/Auth/LogoutButton.vue";
 
 library.add(faBars);
 library.add(faChevronLeft);
 
 export default {
-  components: { FontAwesomeIcon, LocaleSwitcher, ThemeSwitcher, Menu },
+  components: {
+    FontAwesomeIcon,
+    CurrentUserTag,
+    LocaleSwitcher,
+    ThemeSwitcher,
+    Menu,
+    UserLoggedInShow,
+    UserLoggedInHide,
+    LogoutButton
+  },
   inject: ["theme"],
   props: {
     isSideBarOpen: Boolean,
@@ -75,6 +96,9 @@ export default {
     onMenuIconClick(ev) {
       ev.stopPropagation();
       this.$emit("toggleSideBar", !this.isSideBarOpen);
+    },
+    login() {
+      this.$router.push("/login");
     }
   }
 };
@@ -112,6 +136,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
   }
 
   & .right-side {
@@ -119,8 +144,7 @@ header {
     flex-direction: row;
     flex: 1;
     justify-content: flex-end;
-  }
-  & .logo-title {
+    align-items: center;
   }
 }
 </style>

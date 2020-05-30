@@ -66,6 +66,8 @@ export default {
     ...mapActions(["login"]),
     async onSubmit(values) {
       const user = await this.login(values);
+      console.log("user", user);
+
       this.$emit("onLoggedIn", user);
     }
   }

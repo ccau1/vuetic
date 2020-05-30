@@ -1,5 +1,5 @@
 import serverApi from "../apiClients/serverApi";
-import { Todo } from "@/typings";
+import { Todo } from "../typings";
 
 export const findTodos = async () => {
   const todos = await serverApi.get("todos");

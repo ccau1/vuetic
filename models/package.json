@@ -15,11 +15,14 @@
     "apisauce": "^1.1.1",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
+    "moment": "^2.26.0",
     "vue": "^2.6.11",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.150",
     "@typescript-eslint/parser": "^2.31.0",
     "@vue/eslint-config-prettier": "^6.0.0",

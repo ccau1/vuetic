@@ -1,9 +1,12 @@
 import { create, ApisauceInstance, ApiResponse } from "apisauce";
-import TokenManager, { TokenManagerConfig } from "./TokenManager";
+import TokenManager from "./CookieTokenManager";
+import { TokenManagerConfig } from "./BaseTokenManager";
 import ApiInterceptor, {
   ApiInterceptorFactory
 } from "./ApiInterceptors/ApiInterceptors";
 import { AxiosRequestConfig } from "axios";
+import moment from "moment";
+import Cookies from "js-cookie";
 
 export interface ApiConfig {
   baseURL: string;
@@ -17,9 +20,10 @@ export interface ApiConfig {
 }
 
 export class Api {
+  static locale = Cookies.get("locale") || "en";
   protected config: ApiConfig = { baseURL: "" };
   protected api: ApisauceInstance;
-  protected tokenManager?: TokenManager;
+  protected tokenManager: TokenManager;
 
   constructor(config: ApiConfig) {
     // Save constructor parameters
@@ -28,7 +32,7 @@ export class Api {
       ...config
     });
     // create and set token manager
-    this.setTokenManager(new TokenManager());
+    this.tokenManager = new TokenManager();
     // define token config
     this.setTokenConfig(this.config.token || {});
     // instantiate api
@@ -44,6 +48,24 @@ export class Api {
     this.patch = this.api.patch;
     this.link = this.api.link;
     this.unlink = this.api.unlink;
+
+    //default has authorization transform
+    this.api.addRequestTransform(request => {
+      console.log(
+        "addRequestTransform",
+        request,
+        this.tokenManager.getAccessToken()
+      );
+
+      // if token exist , need add , for refetchToken
+      if (this.tokenManager.getAccessToken()) {
+        request.headers["Authorization"] =
+          "Bearer " + this.tokenManager.getAccessToken();
+      }
+      //request.headers['Access-Control-Allow-Origin'] = '*';
+      request.headers["Accept-Language"] = Api.locale;
+      request.headers["utcOffset"] = moment().utcOffset();
+    });
 
     // inject interceptors from config to api
     this.injectInterceptors(this.config.interceptors);
@@ -93,6 +115,11 @@ export class Api {
     axiosConfig?: AxiosRequestConfig
   ) => Promise<ApiResponse<T, U>>;
 
+  static setLocale = (locale: string) => {
+    Cookies.set("locale", locale);
+    Api.locale = locale;
+  };
+
   public setTokenConfig(tokenConfig: TokenManagerConfig): Api {
     // set token manager's config
     this.tokenManager?.setConfig(tokenConfig);
@@ -109,7 +136,7 @@ export class Api {
     return this;
   }
 
-  public getTokenManager(): TokenManager | undefined {
+  public getTokenManager(): TokenManager {
     // return current token manager instance
     return this.tokenManager;
   }

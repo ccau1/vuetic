@@ -1,21 +1,23 @@
 <template>
   <ThemeProvider :theme="theme">
     <div class="container">
-      <Button>Default Button</Button>
-      <Button status="primary">Primary Button</Button>
-      <Button status="secondary">Secondary Button</Button>
-      <Button status="info">Info Button</Button>
-      <Button status="success">Success Button</Button>
-      <Button status="warning">Warning Button</Button>
-      <Button status="danger">Danger Button</Button>
+      <Button @click="onClick">Default Button</Button>
+      <Button status="primary" @click="onClick">Primary Button</Button>
+      <Button status="secondary" @click="onClick">Secondary Button</Button>
+      <Button status="info" @click="onClick">Info Button</Button>
+      <Button status="success" @click="onClick">Success Button</Button>
+      <Button status="warning" @click="onClick">Warning Button</Button>
+      <Button status="danger" @click="onClick">Danger Button</Button>
     </div>
   </ThemeProvider>
 </template>
 
 <script>
-import Button from "../Button.vue";
 import ThemeProvider from "../../ThemeProvider.vue";
 import theme from "../../baseTheme.ts";
+import { action } from "@storybook/addon-actions";
+
+import Button from "../Button.vue";
 
 export default {
   name: "ButtonStatus",
@@ -24,6 +26,12 @@ export default {
     return {
       theme
     };
+  },
+  methods: {
+    onClick() {
+      console.log("clicked");
+      action("clicked");
+    }
   }
 };
 </script>

@@ -1,5 +1,4 @@
 <script>
-import Vue from "vue";
 import { buildParam } from "./utils";
 
 export default {
@@ -17,10 +16,10 @@ export default {
     }
   },
   provide() {
-    const me = this;
+    const thisData = this.$data;
     return {
       get theme() {
-        return me.$data.themer;
+        return thisData.themer;
       }
     };
   },

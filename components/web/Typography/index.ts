@@ -1,8 +1,9 @@
 export { default } from "./Typography.vue";
 
 export interface ThemeTypography {
-  status: {
+  color: {
     primary: string;
+    secondary: string;
     success: string;
     info: string;
     danger: string;

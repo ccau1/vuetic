@@ -8,7 +8,7 @@
   >
     <div class="dd-item-wrapper">
       <DropdownItem
-        :text="'a' + text"
+        :text="text"
         @click="buttonClick"
         v-click-outside="() => setIsOpen(false)"
         :style="[buttonStyle, { paddingRight: '28px' }]"
@@ -32,6 +32,8 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import ClickOutside from "vue-click-outside";
+import DropdownItem from "./DropdownItem";
 
 library.add(faChevronDown);
 
@@ -59,7 +61,8 @@ export default {
       type: String
     }
   },
-  components: { FontAwesomeIcon },
+  components: { FontAwesomeIcon, DropdownItem },
+  directives: { ClickOutside },
   data() {
     return {
       isOpen: false
@@ -179,8 +182,6 @@ export default {
   }
 }
 .dd-item-wrapper {
-  display: flex;
-  flex-direction: row;
 }
 .dd-text-icon {
   position: absolute;

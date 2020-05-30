@@ -8,7 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "connect": "sh link.sh",
+    "connect": "sh ./.connect.sh",
     "i": "yarn install --frozen-lockfile"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "lodash": "^4.17.15",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-avatar": "^2.3.0",
     "vue-class-component": "^7.2.3",
     "vue-fragment": "^1.5.1",
     "vue-i18n": "^8.17.7",

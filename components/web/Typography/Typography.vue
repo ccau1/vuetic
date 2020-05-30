@@ -26,10 +26,18 @@ export default {
           "label2" // display like label1 but bold
         ].includes(val)
     },
-    status: {
-      default: "primary",
+    color: {
+      default: "inherit",
       validate: val =>
-        ["primary", "success", "info", "danger", "hint"].includes(val)
+        [
+          "primary",
+          "secondary",
+          "success",
+          "info",
+          "danger",
+          "hint",
+          "inherit"
+        ].includes(val)
     },
     background: {
       validate: val =>
@@ -55,10 +63,9 @@ export default {
           this.background.charAt(0).toUpperCase() + this.background.slice(1);
         style.color =
           this.theme?.colors?.text?.[`bg${capitalizeText}`] || "inherit";
-      } else if (this.status) {
+      } else if (this.color) {
         style.color =
-          this.theme?.components?.typography?.status?.[this.status] ||
-          "inherit";
+          this.theme?.components?.typography?.color?.[this.color] || "inherit";
       }
 
       return style;

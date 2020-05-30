@@ -51,8 +51,9 @@ export default {
   },
   components: {
     typography: {
-      status: {
-        primary: "#000",
+      color: {
+        primary: "$$colors.primary",
+        secondary: "$$colors.secondary",
         success: "$$colors.success",
         info: "$$colors.info",
         danger: "$$colors.danger",

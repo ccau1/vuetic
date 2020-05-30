@@ -1,23 +1,29 @@
-import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { UserModel, User } from "./interfaces/User";
-import { UserSearchModel } from "./models/user.search.model";
-import * as mongoose from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { UserModel, User } from './interfaces/User';
+import { UserSearchModel } from './models/user.search.model';
+import mongoose from 'mongoose';
+import { ObjectId } from 'mongodb';
 // import { UserCreateModel } from "./models/auth.create.model";
 // import { UserUpdateModel } from "./models/auth.update.model";
+
+// mock user
+export const mockUser = {
+  _id: new ObjectId('5ed0a4b0a5bde5f20229c699'),
+  username: 'app.user1',
+  email: 'app.user1@hotmail.com',
+};
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel('Users') private readonly authRepository: UserModel
-  ) {
-    
-  }
+    @InjectModel('Users') private readonly authRepository: UserModel,
+  ) {}
 
   protected async castQuery(query: UserSearchModel) {
     // initiate query's $and array
     const queryAnd = [];
-    
+
     // if verifyField exists
     if (query.verifyField) {
       // clear out all extra characters to prevent
@@ -27,21 +33,23 @@ export class UserService {
       // verifyField
       queryAnd.push({
         $or: [
-          ...(mongoose.isValidObjectId(sanitizedField) ? [{_id: sanitizedField}] : []),
-          {username: new RegExp(`^${sanitizedField}$`, 'i')},
-          {email: new RegExp(`^${sanitizedField}$`, 'i')}
-        ]
-      })
+          ...(mongoose.isValidObjectId(sanitizedField)
+            ? [{ _id: sanitizedField }]
+            : []),
+          { username: new RegExp(`^${sanitizedField}$`, 'i') },
+          { email: new RegExp(`^${sanitizedField}$`, 'i') },
+        ],
+      });
     }
 
     if (query._ids) {
       queryAnd.push({
-        _id: {$in: query._ids}
+        _id: { $in: query._ids },
       });
     }
 
     // return object optionally with $and field
-    return queryAnd.length ? {$and: queryAnd} : {};
+    return queryAnd.length ? { $and: queryAnd } : {};
   }
 
   public async find(query: UserSearchModel): Promise<User[]> {
