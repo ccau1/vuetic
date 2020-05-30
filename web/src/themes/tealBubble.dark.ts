@@ -20,7 +20,8 @@ export default {
       bgPrimary: "$$colors.text.bgLight",
       bgSecondary: "@bgLight",
       bgDanger: "@bgLight",
-      bgSuccess: "@bgLight"
+      bgSuccess: "@bgLight",
+      bgLink: "$$colors.info"
     },
     test: {
       zero: "$test.one",
@@ -65,6 +66,12 @@ export default {
     },
     textInput: {
       defaultRounded: true
+    },
+    card: {
+      paddingHorizontal: "25",
+      paddingVertical: "25",
+      cornerRadius: 8,
+      defaultElevation: 3
     }
   }
 } as Theme;

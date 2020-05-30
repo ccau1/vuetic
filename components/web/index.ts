@@ -1,6 +1,7 @@
 import { ThemeTextInput } from "./TextInput";
 import { ThemeTypography } from "./Typography";
 import { ThemeButton } from "./Button";
+import { ThemeCard } from "./Card";
 
 export interface ThemeField {
   [key: string]: ThemeField | string | number;
@@ -33,5 +34,6 @@ export interface Theme {
     typography: ThemeTypography;
     button: ThemeButton;
     textInput: ThemeTextInput;
+    card: ThemeCard;
   };
 }

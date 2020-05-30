@@ -35,3 +35,4 @@
 -- [ ] table
 -- [ ] select (https://vue-multiselect.js.org/)
 -- [ ] card (Card, CardHeader, CardFooter)
+-- [ ] checkbox

@@ -24,12 +24,14 @@ export default {
       default: "secondary",
       validate: val =>
         [
+          "default",
           "primary",
           "secondary",
           "info",
           "success",
           "warning",
-          "danger"
+          "danger",
+          "link"
         ].includes(val)
     },
     disabled: Boolean,
@@ -43,7 +45,11 @@ export default {
   computed: {
     style() {
       const style = {};
-      style.backgroundColor = this.theme?.colors?.[this.status];
+      style.backgroundColor =
+        this.status === "link"
+          ? "transparent"
+          : this.theme?.colors?.[this.status];
+
       style.color = this.theme?.colors?.text?.[
         `bg${capitalizeText(this.status)}`
       ];
@@ -72,6 +78,7 @@ button {
   border: 0px solid transparent;
   padding: 13px 20px;
   height: fit-content;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -87,6 +94,9 @@ button {
     background-color: rgba(255, 255, 255, 0.2);
   }
 
+  &.disabled {
+    cursor: default;
+  }
   &.disabled::before {
     content: "";
     position: absolute;

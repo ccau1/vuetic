@@ -8,6 +8,7 @@
       <Button status="success" @click="onClick">Success Button</Button>
       <Button status="warning" @click="onClick">Warning Button</Button>
       <Button status="danger" @click="onClick">Danger Button</Button>
+      <Button status="link" @click="onClick">Link Button</Button>
     </div>
   </ThemeProvider>
 </template>
