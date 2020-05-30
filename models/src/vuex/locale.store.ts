@@ -1,5 +1,6 @@
 import { ActionContext } from "vuex";
 import { RootState } from ".";
+import { Api } from "../lib/Api";
 
 export interface LocaleState {
   currentLocale: string;
@@ -18,6 +19,7 @@ const actions = {
     { commit }: ActionContext<LocaleState, RootState>,
     locale: string
   ) {
+    Api.setLocale(locale);
     commit("setLocale", locale);
   }
 };

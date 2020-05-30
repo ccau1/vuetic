@@ -234,7 +234,7 @@ export default {
   transform: translateY(-50%);
   pointer-events: none;
   transform-origin: 50% 0%;
-  transition: all 500ms ease-out;
+  transition: all 200ms ease-out;
 }
 .dd-button {
   padding: 10px 15px;
