@@ -2,6 +2,7 @@ import { ThemeTextInput } from "./TextInput";
 import { ThemeTypography } from "./Typography";
 import { ThemeButton } from "./Button";
 import { ThemeCard } from "./Card";
+import { ThemeTable } from "./Table";
 
 export interface ThemeField {
   [key: string]: ThemeField | string | number;
@@ -11,6 +12,7 @@ export interface Theme {
   colors: ThemeField;
   dimensions: {
     scale: string | number;
+    borderRadius: string | number;
   };
   breakpoints: {
     xs: string | number;
@@ -35,5 +37,6 @@ export interface Theme {
     button: ThemeButton;
     textInput: ThemeTextInput;
     card: ThemeCard;
+    table: ThemeTable;
   };
 }

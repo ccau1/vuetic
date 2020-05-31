@@ -8,7 +8,7 @@ export default {
   props: {
     category: {
       default: "body1",
-      validate: val =>
+      validator: val =>
         [
           "h1", // display h1
           "h2", // display h2
@@ -28,7 +28,7 @@ export default {
     },
     color: {
       default: "inherit",
-      validate: val =>
+      validator: val =>
         [
           "primary",
           "secondary",
@@ -40,7 +40,7 @@ export default {
         ].includes(val)
     },
     background: {
-      validate: val =>
+      validator: val =>
         [
           "content",
           "light",

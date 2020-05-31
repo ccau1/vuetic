@@ -11,6 +11,7 @@ export default {
     background: "#edddd4",
     backgroundContent: "#edddd4",
     backgroundSection: "#fff",
+    border: "rgba(0, 0, 0, 0.2)",
     text: {
       bgLight: "#000",
       bgDark: "#fff",
@@ -30,7 +31,8 @@ export default {
     }
   },
   dimensions: {
-    scale: 1
+    scale: 1,
+    borderRadius: 8
   },
   breakpoints: {
     xs: 0,
@@ -51,6 +53,30 @@ export default {
     sideBarSeparatorColor: "rgba(0, 0, 0, 0.1)"
   },
   components: {
+    button: {
+      defaultRounded: true
+    },
+    card: {
+      paddingHorizontal: "$$dimensions.scale * 25",
+      paddingVertical: "$$dimensions.scale * 25",
+      cornerRadius: 8,
+      defaultElevation: 3
+    },
+    table: {
+      table: {
+        borderColor: "$$colors.border",
+        borderRadius: "$$dimensions.borderRadius"
+      },
+      tableRow: {},
+      tableCell: {
+        borderHorizontalColor: "$$colors.border",
+        paddingHorizontal: "$$dimensions.scale * 20",
+        paddingVertical: "$$dimensions.scale * 20"
+      }
+    },
+    textInput: {
+      defaultRounded: true
+    },
     typography: {
       color: {
         primary: "$$colors.primary",
@@ -61,18 +87,6 @@ export default {
         warning: "$$colors.warning",
         hint: "rgba(0, 0, 0, 0.6)"
       }
-    },
-    button: {
-      defaultRounded: true
-    },
-    textInput: {
-      defaultRounded: true
-    },
-    card: {
-      paddingHorizontal: "25",
-      paddingVertical: "25",
-      cornerRadius: 8,
-      defaultElevation: 3
     }
   }
 } as Theme;

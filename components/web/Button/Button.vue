@@ -22,7 +22,7 @@ export default {
     click: Function,
     status: {
       default: "secondary",
-      validate: val =>
+      validator: val =>
         [
           "default",
           "primary",
