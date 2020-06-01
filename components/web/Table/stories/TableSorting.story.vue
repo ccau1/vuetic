@@ -124,7 +124,7 @@ export default {
   computed: {
     dataSorted() {
       if (!this.sortBy) return this.data;
-      return this.data.sort((a, b) => {
+      return [...this.data].sort((a, b) => {
         if (a[this.sortBy] > b[this.sortBy]) {
           return this.sortDirection === "asc" ? 1 : -1;
         } else {

@@ -1,9 +1,7 @@
-# Pending
+# Setup
 
-## Features
-
-- delete button also toggles updateTodo
-- trashbin should be inside parent width (no absolute outside)
+## Web Setup
+[Web README](web/README.md)
 
 ## Framework Structure
 
@@ -34,5 +32,5 @@
 - components
 -- [ ] table
 -- [ ] select (https://vue-multiselect.js.org/)
--- [ ] card (Card, CardHeader, CardFooter)
+-- [x] card (Card, CardHeader, CardFooter)
 -- [ ] checkbox
