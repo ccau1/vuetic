@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot('mongodb://mongodb/vuetic', {
+    MongooseModule.forRoot(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/vuetic`, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,

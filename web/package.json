@@ -9,7 +9,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "connect": "sh ./.connect.sh",
-    "i": "yarn install --frozen-lockfile"
+    "i": "yarn install --frozen-lockfile",
+    "d:dev": "SERVER_PORT=8080 docker-compose up"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
