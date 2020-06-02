@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - 9229:9229
+    command: npm run start:dev
+    env_file:
+      - .env
+    networks:
+      - vuetic-net
+    depends_on:
+      - mongodb
+  mongodb:
+    container_name: mongodb
+    image: mongo:3.6.18-xenial
+    ports:
+      - 27017:27017
+    networks:
+      - vuetic-net
+networks:
+  vuetic-net:
