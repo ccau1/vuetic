@@ -42,9 +42,9 @@ export default class BaseTokenManager {
       this.tokenUnAuthenticateObserverList.push(callback);
     }
   }
-  remove(name: "authenticated" | "unAuthenticated", callback: () => void) {
-    // TODO
-  }
+  // remove(name: "authenticated" | "unAuthenticated", callback: () => void) {
+  //   // TODO
+  // }
 
   notifyUnAuthenticate() {
     this.tokenUnAuthenticateObserverList.forEach(fun => fun());

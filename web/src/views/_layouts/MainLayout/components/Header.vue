@@ -19,7 +19,8 @@
             v-breakpoint:show="['md', 'lg', 'xl']"
             category="h1"
             background="primary"
-          >{{ title }}</Typography>
+            >{{ title }}
+          </Typography>
           <!-- </div> -->
         </router-link>
       </div>
@@ -78,6 +79,8 @@ export default {
     title: String
   },
   data() {
+    console.log("abc", this.$route);
+
     const headerStyle = {
       backgroundColor: this.theme?.layout?.headerBg || "#fea",
       color: this.theme?.colors?.text?.bgPrimary || "#000",

@@ -1,4 +1,4 @@
-import BaseTokenManager, { TokenManagerConfig } from "./BaseTokenManager";
+import BaseTokenManager from "./BaseTokenManager";
 import { UserToken } from "@/typings";
 import Cookies from "js-cookie";
 

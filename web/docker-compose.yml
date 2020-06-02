@@ -12,7 +12,7 @@ services:
       - ../components:/usr/src/app/node_modules/@vuetic/components
       - ../models:/usr/src/app/node_modules/@vuetic/models
     ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
+      - 8080:8080
       - 9228:9228
     command: npm run serve
     env_file:

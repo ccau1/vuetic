@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "connect": "sh ./.connect.sh",
     "i": "yarn install --frozen-lockfile",
-    "d:dev": "SERVER_PORT=8080 docker-compose up"
+    "d:dev": "docker-compose up"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
