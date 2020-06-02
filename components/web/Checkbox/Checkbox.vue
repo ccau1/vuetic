@@ -1,5 +1,5 @@
 <template>
-  <label>
+  <label :class="{checked, showLineThrough}">
     <input
       @change="() => this.$emit('change')"
       :checked="checked"
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import Typography from '../Typography/Typography.vue';
 export default {
   name: "Checkbox",
   props: {
@@ -27,9 +28,11 @@ export default {
       type: Boolean
     },
     label: String,
-    change: Function
+    change: Function,
+    showLineThrough: Boolean
   },
-  inject: ["theme"]
+  inject: ["theme"],
+  components: {Typography}
 };
 </script>
 
@@ -39,6 +42,9 @@ export default {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .cbx span {
   display: inline-block;
@@ -84,17 +90,25 @@ export default {
 }
 .cbx .label {
   margin-left: 8px;
+  position: relative;
+}
+.checked.showLineThrough .label {
+  opacity: 0.5;
 }
 .cbx .label:after {
   content: "";
   position: absolute;
+  display: none;
   top: 8px;
   left: 0;
-  height: 1px;
+  height: 2px;
   width: 100%;
-  background: #b9b8c3;
+  background: rgba(0, 0, 0, 0.9);
   transform-origin: 0 0;
   transform: scaleX(0);
+}
+.showLineThrough .label:after {
+  display: block;
 }
 .cbx:hover span:first-child {
   border-color: #3c53c7;

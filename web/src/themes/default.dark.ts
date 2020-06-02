@@ -11,6 +11,7 @@ export default {
     background: "#191919",
     backgroundContent: "#191919",
     backgroundSection: "#141e1d",
+    border: "rgba(0, 0, 0, 0.2)",
     text: {
       bgLight: "#000",
       bgDark: "#fff",
