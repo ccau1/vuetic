@@ -5,8 +5,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 
 export interface AuthGuardOptions {
-  optional: boolean;
-  type: string;
+  optional?: boolean;
+  type?: string;
 }
 
 export const AuthGuard = (options?: AuthGuardOptions) => {
