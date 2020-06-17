@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :style="style" :class="`elevation--z${elevation}`">
+  <div v-on="listeners" class="card" :style="style" :class="`elevation--z${elevation}`">
     <slot />
   </div>
 </template>
@@ -25,6 +25,9 @@ export default {
       style.borderRadius =
         (this.theme?.components?.card?.cornerRadius || 0) + "px";
       return style;
+    },
+    listeners() {
+      return this.$listeners;
     }
   }
 };

@@ -18,3 +18,16 @@ export interface User {
   email: string;
   username: string;
 }
+
+//added "?" as create post not need
+export interface Post {
+  slug?: string;
+  title: { [key: string]: string };
+  content: { [key: string]: string };
+  categories?: [string];
+  isArchived?: boolean;
+  createdBy?: string;
+}
+
+export interface PostSearch {
+}

@@ -23,9 +23,9 @@ export const AuthGuard = (options?: AuthGuardOptions) => {
       let finalContext = context;
       try {
         const ctx = GqlExecutionContext.create(context);
-        const grahpQlCtx = ctx.getContext();
-        if (grahpQlCtx && grahpQlCtx.req) {
-          finalContext = new ExecutionContextHost([grahpQlCtx.req]);
+        const graphQlCtx = ctx.getContext();
+        if (graphQlCtx && graphQlCtx.req) {
+          finalContext = new ExecutionContextHost([graphQlCtx.req]);
         }
       } catch (error) {
         console.error(error);

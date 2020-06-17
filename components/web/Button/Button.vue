@@ -4,6 +4,7 @@
     :disabled="disabled"
     :style="style"
     :class="[
+      { active: this.active },
       'status-' + (this.status || 'primary'),
       { rounded: this.rounded !== undefined && this.rounded !== false },
       { disabled: this.disabled !== undefined && this.disabled !== false }
@@ -39,7 +40,13 @@ export default {
       default: null,
       type: Boolean
     },
-    full: Boolean
+    size: {
+      type: String,
+      validator: val => ["sm", "md", "lg"].includes(val),
+      default: "md"
+    },
+    full: Boolean,
+    active: Boolean
   },
   inject: ["theme"],
   computed: {
@@ -60,6 +67,18 @@ export default {
           this.theme?.components?.button?.defaultRounded)
       ) {
         style.borderRadius = "8px";
+      }
+
+      switch (this.size) {
+        case "sm":
+          style.padding = "8px 10px";
+          break;
+        case "md":
+          style.padding = "13px 20px";
+          break;
+        case "lg":
+          style.padding = "15px 25px";
+          break;
       }
 
       if (this.full) {
@@ -83,7 +102,8 @@ button {
   &:focus {
     outline: none;
   }
-  &:active::before {
+  &:active::before,
+  &.active::before {
     content: "";
     position: absolute;
     top: 0;

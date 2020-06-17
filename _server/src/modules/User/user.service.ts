@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserModel, User } from './interfaces/User';
+import { UserModel, User } from './interfaces/user';
 import { UserSearchModel } from './models/user.search.model';
 import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';

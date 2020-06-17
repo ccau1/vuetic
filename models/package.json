@@ -18,12 +18,14 @@
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
     "moment": "^2.26.0",
+    "qs": "^6.9.4",
     "vue": "^2.6.11",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.150",
+    "@types/qs": "^6.9.3",
     "@typescript-eslint/parser": "^2.31.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",

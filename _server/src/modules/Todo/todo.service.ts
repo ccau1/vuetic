@@ -1,16 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { TodoModel } from "./interfaces/Todo";
-import { TodoCreateModel } from "./models/todo.create.model";
-import { TodoUpdateModel } from "./models/todo.update.model";
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { TodoModel } from './interfaces/todo';
+import { TodoCreateModel } from './models/todo.create.model';
+import { TodoUpdateModel } from './models/todo.update.model';
 
 @Injectable()
 export class TodoService {
   constructor(
-    @InjectModel('Todos') private readonly todoRepository: TodoModel
-  ) {
-    
-  }
+    @InjectModel('Todos') private readonly todoRepository: TodoModel,
+  ) {}
 
   public async find() {
     return this.todoRepository.find();
@@ -21,7 +19,7 @@ export class TodoService {
   }
 
   public async update(_id: string, todo: TodoUpdateModel) {
-    return this.todoRepository.findByIdAndUpdate(_id, todo, {new: true});
+    return this.todoRepository.findByIdAndUpdate(_id, todo, { new: true });
   }
 
   public async delete(_id: string) {
