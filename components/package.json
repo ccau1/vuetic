@@ -20,7 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^2.32.0",
     "core-js": "^3.6.4",
     "json-schema": "^0.2.5",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-click-outside": "^1.1.0",
