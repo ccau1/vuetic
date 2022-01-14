@@ -8,7 +8,7 @@ import {
   Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './interfaces/User';
+import { User } from './interfaces/user';
 import { AuthGuard } from '../Auth/user.auth.guard';
 import { CurrentUser } from '../../core/decorators/currentUser.decorator';
 

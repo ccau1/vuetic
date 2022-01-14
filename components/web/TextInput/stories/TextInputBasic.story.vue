@@ -3,7 +3,7 @@
     <TextInput
       label="Username"
       :value="text"
-      @input="ev => (this.text = ev.target.value)"
+      @input="(ev) => (this.text = ev.target.value)"
     />
   </ThemeProvider>
 </template>

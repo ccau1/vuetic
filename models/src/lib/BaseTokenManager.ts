@@ -1,4 +1,4 @@
-import { UserToken } from "@/typings";
+import { UserToken } from "../typings";
 
 export interface TokenManagerConfig {
   storageName?: string;

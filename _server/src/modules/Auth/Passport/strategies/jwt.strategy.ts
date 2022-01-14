@@ -9,7 +9,7 @@ import {
 // Interfaces & Services
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from '../../../../modules/User/interfaces/User';
+import { User } from '../../../User/interfaces/user';
 import { mockUser } from '../../../User/user.service';
 
 @Injectable()

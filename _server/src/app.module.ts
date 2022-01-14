@@ -6,13 +6,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/Auth/auth.module';
 import { UserModule } from './modules/User/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { CategoryModule } from './modules/Category/category.module';
+import { PostModule } from './modules/Post/post.module';
+import mongoUrlBuilder from './core/mongo/mongoUrlBuilder';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/vuetic`, {
+    MongooseModule.forRoot(mongoUrlBuilder(), {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
@@ -22,6 +25,8 @@ import { ConfigModule } from '@nestjs/config';
     TodoModule,
     AuthModule,
     UserModule,
+    CategoryModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

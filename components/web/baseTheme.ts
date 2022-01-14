@@ -53,6 +53,10 @@ export default {
     sideBarSeparatorColor: "rgba(0, 0, 0, 0.1)"
   },
   components: {
+    appBar: {
+      background: "$$colors.primary",
+      color: "$$colors.text.bgLight"
+    },
     button: {
       defaultRounded: true
     },

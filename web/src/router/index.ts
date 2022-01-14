@@ -28,6 +28,26 @@ export const routes: Array<RouteConfig> = [
     path: "/login",
     name: "Login",
     component: () => import("@/views/Login.vue")
+  },
+  {
+    path: "/posts",
+    name: "Posts",
+    component: () => import("@/views/Posts.vue")
+  },
+  // {
+  //   path: "/posts/:id",
+  //   name: "PostDetail",
+  //   component: () => import("@/views/PostDetail.vue")
+  // }
+  {
+    path: "/posts/slugs/:slug",
+    // name: "PostDetail",
+    component: () => import("@/views/PostDetail.vue")
+  },
+  {
+    path: "/posts/create",
+    name: "Write Post",
+    component: () => import("@/views/CreatePost.vue")
   }
 ];
 

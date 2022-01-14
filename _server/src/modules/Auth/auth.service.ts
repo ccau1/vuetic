@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { AuthModel } from './interfaces/Auth';
+import { AuthModel } from './interfaces/auth';
 import { UserService } from '../User/user.service';
 // import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';

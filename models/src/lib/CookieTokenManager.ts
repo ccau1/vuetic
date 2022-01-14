@@ -1,5 +1,5 @@
 import BaseTokenManager from "./BaseTokenManager";
-import { UserToken } from "@/typings";
+import { UserToken } from "../typings";
 import Cookies from "js-cookie";
 
 export default class TokenManager extends BaseTokenManager {
